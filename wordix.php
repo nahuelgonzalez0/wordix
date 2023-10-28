@@ -139,7 +139,9 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- aaa
+ * Verifica si la palabra ingresada por el usuario no contiene numeros ni caracteres especiales
+ @param string $cadena 
+ return boolean 
  */
 function esPalabra($cadena)
 {
