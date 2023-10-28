@@ -139,7 +139,7 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- * ****COMPLETAR*****
+ aaa
  */
 function esPalabra($cadena)
 {
