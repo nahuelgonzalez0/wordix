@@ -10,3 +10,5 @@ Tecnicatura en Desarrollo Web
 **Santiago Nicolas Poo** - Legajo 3923 - mail:santiago.poo@est.fai.uncoma.edu.ar - github: SantiagoPoo
 
 **Marcos Nahuel Gonzalez** - Legajo 4869 - mail: mnahuel.gonzalez@est.fi.uncoma.edu.ar - github:nahuelgonzalez0
+
+**José Vicente Reyes Castelló** - Legajo 3220 - mail: jose.reyes@est.fi.uncoma.edu.ar - github:jovirecast
