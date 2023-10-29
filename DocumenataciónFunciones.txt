@@ -14,24 +14,27 @@ funcion escribirSegunEstado: Escribe un texto en pantalla teniendo en cuenta el 
 funcion escribirMensajeBienvenida: Le da mensaje de bienvenida al usuario.
 #Linea 124
 
+funcion cargarColeccionPalabras: Obtiene una colección de palabras.
+#linea 136
+
 funcion esPalabra: Verifica si la palabra ingresada por el usuario no contiene numeros ni caracteres especiales.
-#Linea 138
+#Linea 153
 
 funcion leerPalabra5Letras: Le solicita al usuario una palabra de cinco letras y verifica que sea de cinco letras.
-#Linea 155
+#Linea 170
 
 funcion iniciarTeclado: Inicia una estructura de datos Teclado.
-#Linea 173
+#Linea 188
 
 funcion escribirTeclado: Escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
-#Linea 190
+#Linea 205
 
 funcion imprimirIntentosWordix: Escribe en pantalla los intentos de Wordix para adivinar la palabra
-#Linea 219
+#Linea 234
 
 funcion analizarPalabraIntento: Dada la palabra wordix a adivinar, la estructura para almacenar la información del intento y la palabra que intenta adivinar la palabra wordix.
 Devuelve la estructura de intentos Wordix modificada con el intento.
-#Linea 251
+#Linea 266
 
 funcion actualizarTeclado: Actualiza el estado de las letras del teclado. 
  * Teniendo en cuenta que una letra sólo puede pasar:
@@ -39,13 +42,13 @@ funcion actualizarTeclado: Actualiza el estado de las letras del teclado.
  * de ESTADO_LETRA_DISPONIBLE a ESTADO_LETRA_DESCARTADA, 
  * de ESTADO_LETRA_DISPONIBLE a ESTADO_LETRA_PERTENECE
  * de ESTADO_LETRA_PERTENECE a ESTADO_LETRA_ENCONTRADA
-#Linea 284
+#Linea 299
 
 funcion esIntentoGanado: Determina si se ganó una palabra intento posee todas sus letras "Encontradas".
-#Linea 307
+#Linea 322
 
 funcion obtenerPuntajeWordix: Le marca el puntaje al usuario
-#Linea 327
+#Linea 334
 
 funcion jugarWordix: Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
-#Linea 339
+#Linea 391

@@ -1,0 +1,16 @@
+<?php
+$puntaje = 6;
+$n = 6;
+while( $n>0){
+    echo "Ingrese palabra: ";
+    $palabra = trim(fgets(STDIN));
+
+    if($palabra == "auto"){
+       $n = 0;
+    } else {
+     $puntaje = $puntaje - 1; 
+     $n = $n - 1;
+    }
+}
+
+echo "Puntaje: " . $puntaje;
