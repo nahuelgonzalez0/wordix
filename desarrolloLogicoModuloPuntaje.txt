@@ -1,0 +1,19 @@
+Desarrollo lógico de la creación del módulo para determinar el puntaje
+
+Objetivo:
+Devolver el puntaje obtenido según los intentos y las letras
+
+Criterio para puntaje:
+- Cada intento obtiene un puntaje especifico:
+    1) Más de 6 intentos: 0 Puntos.
+    2) Menos de 6 intentos: de 6 puntos (con 1 intento) a 1 punto (con 6 intentos)
+- Cada letra obtiene un puntaje especifico:
+    1) Vocales: 1 punto.
+    2) Consonantes menores o iguales a M: 2 puntos.
+    3) Consonantes mayores a M: 3 puntos.
+
+Datos de ingreso:
+- Cantidad de intentos realizados.
+- Palabra ingresada.
+    1) Límite de la palabra: 5 caracteres (ni más ni menos).
+- Límite de intentos: 6 (según constante const CANT_INTENTOS = 6).
