@@ -208,7 +208,7 @@ function escribirTeclado($teclado){
     $ordenTeclado = [
         "salto",
         "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "salto",
-        "A", "S", "D", "F", "G", "H", "J", "K", "L", "salto",
+        "A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ", "salto",
         "Z", "X", "C", "V", "B", "N", "M", "salto"
     ];
 
@@ -338,12 +338,49 @@ function esIntentoGanado($estructuraPalabraIntento){
 
 /**
  * Le marca el puntaje al usuario
+ * @param string $palabra
+ * @return int
  */
-function obtenerPuntajeWordix()
-{
+function obtenerPuntajeWordix($palabra){
+    //int $puntaje, $i
+    //bolean $condicion
+    //string $palabraSeparada, $diccionario
+    
+    //Inicialización de variables
+    $condicion = false;
+    $diccionario = cargarColeccionPalabras();
+    $puntaje = CANT_INTENTOS;
 
-    return 0;
+    while(!$condicion && $puntaje > 0){ //Para determinar el puntaje segun los intentos
+        
+        if($palabra == array_rand($diccionario)){
+            $condicion = true;
+        } else {
+            $puntaje--;
+        }
+    }
+
+
+    if($puntaje > 0){ //Para determinar el puntaje según la letra
+        $palabraSeparada = str_split($palabra);
+        $abecedario[0] = ["A", "E", "I", "O", "U",];
+        $abecedario[1]=["B", "C", "D", "F", "G", "H", "J", "K", "L", "M"];
+        $abecedario[2]=["N", "Ñ", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"];
+
+        for ($i=0; $i < 5; $i++) {
+            if (in_array($palabra[$i],$abecedario[0])){
+                $puntaje = $puntaje + 1;
+            } else if (in_array($palabraSeparada[$i],$abecedario[1])){
+                $puntaje = $puntaje + 2;
+            } else {
+                $puntaje = $puntaje + 3;
+            }
+        }
+    }
+
+    return $puntaje;
 }
+
 
 /**
  * Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
