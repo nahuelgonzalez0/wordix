@@ -129,6 +129,21 @@ function escribirMensajeBienvenida($usuario){
     echo "***************************************************\n";
 }
 
+/**
+ * Obtiene una colección de palabras
+ * @return array
+ */
+function cargarColeccionPalabras()
+{
+    $coleccionPalabras = [
+        "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
+        "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
+        "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
+        "ARBOL", "ABETO", "ALAGO", "ALTAR", "MANOS"
+    ];
+
+    return ($coleccionPalabras);
+}
 
 /**
  * Verifica si la palabra ingresada por el usuario no contiene numeros ni caracteres especiales
