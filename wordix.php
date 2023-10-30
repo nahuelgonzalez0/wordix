@@ -145,6 +145,20 @@ function cargarColeccionPalabras()
     return ($coleccionPalabras);
 }
 
+/** 
+ * Almacena las partidas del usuario
+ * @return array
+ */
+function coleccionPartidas(){
+    
+    $coleccionPar = [
+        palabraWordix" => $palabraWordix,
+        "jugador" => $nombreUsuario,
+        "intentos" => $nroIntento,
+        "puntaje" => $puntaje
+    ]
+}
+
 /**
  * Verifica si la palabra ingresada por el usuario no contiene numeros ni caracteres especiales
  * @param string $cadena 
@@ -431,13 +445,15 @@ function jugarWordix($palabraWordix, $nombreUsuario){
     return $partida;
 }
 
+
 /**
  * Colección de partidas jugadas
+ * @param int $partida
  * @return 
- *  */ 
-function coleccionPartidas(){
-    
+ *  */
+
+function coleccionPartidas($partida){    
     $listadoPartidas = [];
     array_push($listadoPartidas, $partida);
-
+    return $listadoPartidas;
 }
