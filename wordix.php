@@ -149,14 +149,16 @@ function cargarColeccionPalabras()
  * Almacena las partidas del usuario
  * @return array
  */
-function coleccionPartidas(){
+function cargarColeccionPartidas(){
     
-    $coleccionPar = [
-        palabraWordix" => $palabraWordix,
-        "jugador" => $nombreUsuario,
-        "intentos" => $nroIntento,
-        "puntaje" => $puntaje
-    ]
+    $coleccionPartida = [
+        "palabraWordix" => "MUJER",
+        "jugador" => "Tulio",
+        "intentos" => "1",
+        "puntaje" => "15"
+    ];
+
+    return $coleccionPartida;
 }
 
 /**
