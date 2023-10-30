@@ -74,7 +74,7 @@ $menuOpciones=[ "Menú de opciones",
             echo 'ingrese su usuario: ';
             $usuarios = trim(fgets(STDIN));
 
-            $mensaje = escribirMensajeBienvenida($usuarios);
+            escribirMensajeBienvenida($usuarios);
 
             echo 'ingrese un numero de palabra para jugar:';
 
@@ -88,7 +88,7 @@ $menuOpciones=[ "Menú de opciones",
           echo 'ingrese su usuario: ';
           $usuarios = trim(fgets(STDIN));
 
-          $mensaje = escribirMensajeBienvenida($usuarios);
+          escribirMensajeBienvenida($usuarios);
 
           $indicePalabras = cargarColeccionPalabras();
 
