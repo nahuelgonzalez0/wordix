@@ -430,3 +430,14 @@ function jugarWordix($palabraWordix, $nombreUsuario){
 
     return $partida;
 }
+
+/**
+ * Colección de partidas jugadas
+ * @return 
+ *  */ 
+function coleccionPartidas(){
+    
+    $listadoPartidas = [];
+    array_push($listadoPartidas, $partida);
+
+}
