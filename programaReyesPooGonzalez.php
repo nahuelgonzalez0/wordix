@@ -34,7 +34,7 @@ Universidad Nacional del Comahue
 /**************************************/
 
 //Declaración de variables:
-// array $menuOpciones, $indicePalabras
+// array $menuOpciones, $indicePalabras, $partida
 // int $valor, $indiceElegido
 // float $opcion
 // string $usuarios, $mensaje
@@ -82,7 +82,7 @@ $menuOpciones=[ "Menú de opciones",
 
             $indiceElegido =  trim(fgets(STDIN));
 
-            $partida = jugarWordix($indicePalabras[$indiceElegido], strtolower($usuario));
+            $partida = jugarWordix($indicePalabras[$indiceElegido], strtolower($usuarios));
             break;
         case 2: 
           echo 'ingrese su usuario: ';
@@ -92,7 +92,7 @@ $menuOpciones=[ "Menú de opciones",
 
           $indicePalabras = cargarColeccionPalabras();
 
-          $partida = jugarWordix(array_rand($indicePalabras,1), strtolower($usuario)); //array_rand selecciona un indice random
+          $partida = jugarWordix(array_rand($indicePalabras,1), strtolower($usuarios)); //array_rand selecciona un indice random
             break;
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
