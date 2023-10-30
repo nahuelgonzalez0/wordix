@@ -74,13 +74,11 @@ $menuOpciones=[ "Menú de opciones",
             echo 'ingrese su usuario: ';
             $usuarios = trim(fgets(STDIN));
 
-            escribirMensajeBienvenida($usuarios);
-
             echo 'ingrese un numero de palabra para jugar:';
 
             $indicePalabras = cargarColeccionPalabras();
 
-            $indiceElegido =  trim(fgets(STDIN));
+            $indiceElegido =  trim(fgets(STDIN)); // preguntar como limitar a los indicies del arreglo coleccionPalabras
 
             $partida = jugarWordix($indicePalabras[$indiceElegido], strtolower($usuarios));
             break;
@@ -88,14 +86,23 @@ $menuOpciones=[ "Menú de opciones",
           echo 'ingrese su usuario: ';
           $usuarios = trim(fgets(STDIN));
 
-          escribirMensajeBienvenida($usuarios);
-
           $indicePalabras = cargarColeccionPalabras();
 
           $partida = jugarWordix(array_rand($indicePalabras,1), strtolower($usuarios)); //array_rand selecciona un indice random
             break;
         case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            
+          $resultadoPartidas = coleccionPartidas($partida);
+          
+          echo "Ingrese el número de partida: ";
+          
+          $numeroPartida = trim(fgets(STDIN));
+          
+          // echo $resultadoPartidas[$numeroPartida];
+          
+          /* foreach($resultadoPartidas as $numeroPartida) {
+            echo $numeroPartida . "\n";
+        } */
 
             break;
           case 4: 
