@@ -15,7 +15,7 @@ funcion escribirMensajeBienvenida: Le da mensaje de bienvenida al usuario.
 #Linea 124
 
 funcion cargarColeccionPalabras: Obtiene una colección de palabras.
-#linea 136
+#Linea 136
 
 funcion esPalabra: Verifica si la palabra ingresada por el usuario no contiene numeros ni caracteres especiales.
 #Linea 153
