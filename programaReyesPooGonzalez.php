@@ -98,11 +98,36 @@ $menuOpciones=[ "Menú de opciones",
           
           $numeroPartida = trim(fgets(STDIN));
           
+          
           // echo $resultadoPartidas[$numeroPartida];
           
           /* foreach($resultadoPartidas as $numeroPartida) {
             echo $numeroPartida . "\n";
         } */
+
+
+        /**
+          aca empieza
+         echo 'ingrese el numero de la partida';
+        $numeroPartida = trim(fgets(STDIN));
+        $partida[$numeroPartida]= [
+        "partida Wordix" => $numeroPartida,
+        "palabraWordix" => "MUJER",
+        "jugador" => "jorge",
+        "intentos" => "6",
+        "puntaje" => "0"
+        ];
+      foreach ($partida as $estadisticas) {
+     echo "Partida WORDIX {$estadisticas["partida Wordix"]}: palabra {$estadisticas["palabraWordix"]}\njugador: {$estadisticas["jugador"]}\npuntaje: {$estadisticas["puntaje"]}\n";
+    }
+  if ($partida[$numeroPartida]["puntaje"]==0) {
+    echo 'Intento: No adivino la palabra';
+  } elseif ($partida[$numeroPartida]["intentos"] ==1){
+    echo "adivino la palabra en: {$partida[$numeroPartida]["intentos"]} intento";
+  } else {
+    echo "adivino la palabra en: {$partida[$numeroPartida]["intentos"]} intentos";
+  }
+*/
 
             break;
           case 4: 
