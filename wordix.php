@@ -33,7 +33,8 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
  *@param float $max
  *@return float;
  */
-function solicitarNumeroEntre($min, $max){
+function solicitarNumeroEntre($min, $max)
+{
     //int $numero
 
     $numero = trim(fgets(STDIN));
@@ -41,7 +42,7 @@ function solicitarNumeroEntre($min, $max){
     if (is_numeric($numero)) { //determina si un string es un número. puede ser float como entero.
         $numero  = $numero * 1; //con esta operación convierto el string en número.
     }
-    
+
     while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
         echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
         $numero = trim(fgets(STDIN));
@@ -56,7 +57,8 @@ function solicitarNumeroEntre($min, $max){
  * Escribir un texto en color ROJO
  * @param string $texto)
  */
-function escribirRojo($texto){
+function escribirRojo($texto)
+{
     echo "\e[1;37;41m $texto \e[0m";
 }
 
@@ -64,7 +66,8 @@ function escribirRojo($texto){
  * Escrbir un texto en color VERDE
  * @param string $texto)
  */
-function escribirVerde($texto){
+function escribirVerde($texto)
+{
     echo "\e[1;37;42m $texto \e[0m";
 }
 
@@ -72,7 +75,8 @@ function escribirVerde($texto){
  * Escrbir un texto en color AMARILLO
  * @param string $texto)
  */
-function escribirAmarillo($texto){
+function escribirAmarillo($texto)
+{
     echo "\e[1;37;43m $texto \e[0m";
 }
 
@@ -80,7 +84,8 @@ function escribirAmarillo($texto){
  * Escrbir un texto en color GRIS
  * @param string $texto)
  */
-function escribirGris($texto){
+function escribirGris($texto)
+{
     echo "\e[1;34;47m $texto \e[0m";
 }
 
@@ -88,7 +93,8 @@ function escribirGris($texto){
  * Escrbir un texto pantalla.
  * @param string $texto)
  */
-function escribirNormal($texto){
+function escribirNormal($texto)
+{
     echo "\e[0m $texto \e[0m";
 }
 
@@ -97,7 +103,8 @@ function escribirNormal($texto){
  * @param string $texto
  * @param string $estado
  */
-function escribirSegunEstado($texto, $estado){
+function escribirSegunEstado($texto, $estado)
+{
     switch ($estado) {
         case ESTADO_LETRA_DISPONIBLE:
             escribirNormal($texto);
@@ -121,7 +128,8 @@ function escribirSegunEstado($texto, $estado){
  *Le da mensaje de bienvenida al usuario
  *@param string $usuario
  */
-function escribirMensajeBienvenida($usuario){
+function escribirMensajeBienvenida($usuario)
+{
     echo "***************************************************\n";
     echo "** Hola ";
     escribirAmarillo($usuario);
@@ -149,8 +157,9 @@ function cargarColeccionPalabras()
  * Almacena las partidas del usuario
  * @return array
  */
-function cargarColeccionPartidas(){
-    
+function cargarColeccionPartidas()
+{
+
     $coleccionPartida = [
         "palabraWordix" => "MUJER",
         "jugador" => "Tulio",
@@ -166,7 +175,8 @@ function cargarColeccionPartidas(){
  * @param string $cadena 
  * @return boolean 
  */
-function esPalabra($cadena){
+function esPalabra($cadena)
+{
     //int $cantCaracteres, $i, boolean $esLetra
     $cantCaracteres = strlen($cadena);
     $esLetra = true;
@@ -183,10 +193,11 @@ function esPalabra($cadena){
  * Le solicita al usuario una palabra de cinco letras y verifica que sea de cinco letras
  * @return string
  */
-function leerPalabra5Letras(){
+function leerPalabra5Letras()
+{
     //string $palabra
     echo "Ingrese una palabra de 5 letras: ";
-    $palabra = trim(fgets(STDIN)); 
+    $palabra = trim(fgets(STDIN));
     $palabra  = strtoupper($palabra); // convierte el string a mayúsculas
 
     while ((strlen($palabra) != 5) || !esPalabra($palabra)) { // verifica que el string palabra tenga 5 caractéres y no contiene números ni caracteres especiales
@@ -201,7 +212,8 @@ function leerPalabra5Letras(){
  * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
  *@return array
  */
-function iniciarTeclado(){
+function iniciarTeclado()
+{
     //array $teclado (arreglo asociativo, cuyas claves son las letras del alfabeto)
     $teclado = [
         "A" => ESTADO_LETRA_DISPONIBLE, "B" => ESTADO_LETRA_DISPONIBLE, "C" => ESTADO_LETRA_DISPONIBLE, "D" => ESTADO_LETRA_DISPONIBLE, "E" => ESTADO_LETRA_DISPONIBLE,
@@ -218,7 +230,8 @@ function iniciarTeclado(){
  * Escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
  * @param array $teclado
  */
-function escribirTeclado($teclado){
+function escribirTeclado($teclado)
+{
     //array $ordenTeclado (arreglo indexado con el orden en que se debe escribir el teclado en pantalla)
     //string $letra, $estado
     $ordenTeclado = [
@@ -247,7 +260,8 @@ function escribirTeclado($teclado){
  * Escribe en pantalla los intentos de Wordix para adivinar la palabra
  * @param array $estruturaIntentosWordix
  */
-function imprimirIntentosWordix($estructuraIntentosWordix){
+function imprimirIntentosWordix($estructuraIntentosWordix)
+{
     $cantIntentosRealizados = count($estructuraIntentosWordix);
     //$cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
 
@@ -279,7 +293,8 @@ function imprimirIntentosWordix($estructuraIntentosWordix){
  * @param string $palabraIntento
  * @return array estructura wordix modificada
  */
-function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palabraIntento){
+function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palabraIntento)
+{
     $cantCaracteres = strlen($palabraIntento);
     $estructuraPalabraIntento = []; /*almacena cada letra de la palabra intento con su estado */
     for ($i = 0; $i < $cantCaracteres; $i++) {
@@ -312,7 +327,8 @@ function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palab
  * @param array $estructuraPalabraIntento
  * @return array el teclado modificado con los cambios de estados.
  */
-function actualizarTeclado($teclado, $estructuraPalabraIntento){
+function actualizarTeclado($teclado, $estructuraPalabraIntento)
+{
     foreach ($estructuraPalabraIntento as $letraIntento) {
         $letra = $letraIntento["letra"];
         $estado = $letraIntento["estado"];
@@ -335,7 +351,8 @@ function actualizarTeclado($teclado, $estructuraPalabraIntento){
  * @param array $estructuraPalabraIntento
  * @return bool
  */
-function esIntentoGanado($estructuraPalabraIntento){
+function esIntentoGanado($estructuraPalabraIntento)
+{
     $cantLetras = count($estructuraPalabraIntento);
     $i = 0;
 
@@ -357,19 +374,20 @@ function esIntentoGanado($estructuraPalabraIntento){
  * @param string $palabra
  * @return int
  */
-function obtenerPuntajeWordix($palabra){
+function obtenerPuntajeWordix($palabra)
+{
     //int $puntaje, $i
     //bolean $condicion
     //string $palabraSeparada, $diccionario
-    
+
     //Inicialización de variables
     $condicion = false;
     $diccionario = cargarColeccionPalabras();
     $puntaje = CANT_INTENTOS;
 
-    while(!$condicion && $puntaje > 0){ //Para determinar el puntaje segun los intentos
-        
-        if($palabra == array_rand($diccionario)){
+    while (!$condicion && $puntaje > 0) { //Para determinar el puntaje segun los intentos
+
+        if ($palabra == array_rand($diccionario)) {
             $condicion = true;
         } else {
             $puntaje--;
@@ -377,16 +395,16 @@ function obtenerPuntajeWordix($palabra){
     }
 
 
-    if($puntaje > 0){ //Para determinar el puntaje según la letra
+    if ($puntaje > 0) { //Para determinar el puntaje según la letra
         $palabraSeparada = str_split($palabra);
         $abecedario[0] = ["A", "E", "I", "O", "U",];
-        $abecedario[1]=["B", "C", "D", "F", "G", "H", "J", "K", "L", "M"];
-        $abecedario[2]=["N", "Ñ", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"];
+        $abecedario[1] = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M"];
+        $abecedario[2] = ["N", "Ñ", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"];
 
-        for ($i=0; $i < 5; $i++) {
-            if (in_array($palabra[$i],$abecedario[0])){
+        for ($i = 0; $i < 5; $i++) {
+            if (in_array($palabra[$i], $abecedario[0])) {
                 $puntaje = $puntaje + 1;
-            } else if (in_array($palabraSeparada[$i],$abecedario[1])){
+            } else if (in_array($palabraSeparada[$i], $abecedario[1])) {
                 $puntaje = $puntaje + 2;
             } else {
                 $puntaje = $puntaje + 3;
@@ -404,7 +422,8 @@ function obtenerPuntajeWordix($palabra){
  * @param string $nombreUsuario
  * @return array estructura con el resumen de la partida, para poder ser utilizada en estadísticas.
  */
-function jugarWordix($palabraWordix, $nombreUsuario){
+function jugarWordix($palabraWordix, $nombreUsuario)
+{
     /*Inicialización*/
     $arregloDeIntentosWordix = [];
     $teclado = iniciarTeclado();
@@ -456,10 +475,11 @@ function jugarWordix($palabraWordix, $nombreUsuario){
 
 $listadoPartidas = [];
 
-function coleccionPartidas($partida){    
+function coleccionPartidas($partida)
+{
 
     array_push($listadoPartidas, $partida);
-    
+
     return $listadoPartidas;
 }
 
@@ -468,27 +488,29 @@ function coleccionPartidas($partida){
  * @param int $partidaNumero
  * @param array $partida
  */
- 
-function mostrarColeccionPartidas($partida,$partidaNumero){
- 
- $partidaNumero=$partidaNumero-1;
 
- $partida[$partidaNumero] = [
+function mostrarColeccionPartidas($partida, $partidaNumero)
+{
+
+    $partidaNumero = $partidaNumero - 1;
+
+    $partida[$partidaNumero] = [
         "partida Wordix" => $partidaNumero,
-        "palabraWordix" => "MUJER", 
+        "palabraWordix" => "MUJER",
         "jugador" => "jorge",
         "intentos" => "6",
         "puntaje" => "0"
- ];
+    ];
 
- foreach ($partida as $estadisticas) {
+    foreach ($partida as $estadisticas) {
         echo "Partida WORDIX {$estadisticas["partida Wordix"]}: palabra {$estadisticas["palabraWordix"]}\njugador: {$estadisticas["jugador"]}\npuntaje: {$estadisticas["puntaje"]}\n";
     }
- if ($partida[$partidaNumero]["puntaje"]==0) {
-    echo 'Intento: No adivino la palabra';
- } elseif ($partida[$partidaNumero]["intentos"] ==1){
-    echo "adivino la palabra en: {$partida[$partidaNumero]["intentos"]} intento";
- } else {
-    echo "adivino la palabra en: {$partida[$partidaNumero]["intentos"]} intentos";
- }
-} 
+
+    if ($partida[$partidaNumero]["puntaje"] == 0) {
+        echo 'Intento: No adivino la palabra';
+    } elseif ($partida[$partidaNumero]["intentos"] == 1) {
+        echo "adivino la palabra en: {$partida[$partidaNumero]["intentos"]} intento";
+    } else {
+        echo "adivino la palabra en: {$partida[$partidaNumero]["intentos"]} intentos";
+    }
+}
