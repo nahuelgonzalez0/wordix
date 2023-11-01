@@ -491,4 +491,4 @@ function mostrarColeccionPartidas($partida,$partidaNumero){
  } else {
     echo "adivino la palabra en: {$partida[$partidaNumero]["intentos"]} intentos";
  }
-}
+} 
