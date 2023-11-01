@@ -42,6 +42,9 @@ Universidad Nacional del Comahue
 
 //Inicialización de variables:
 
+$indicePalabras = cargarColeccionPalabras(); // Inicializa el arreglo con la coleccion de palabras del juego
+
+$resultadoPartidas = cargarColeccionPartidas(); // Inicializa el arreglo con el historial de partidas
 
 //Proceso:
 
@@ -75,59 +78,30 @@ $menuOpciones=[ "Menú de opciones",
             $usuarios = trim(fgets(STDIN));
 
             echo 'ingrese un numero de palabra para jugar:';
-
-            $indicePalabras = cargarColeccionPalabras();
-
+          
             $indiceElegido =  trim(fgets(STDIN)); // preguntar como limitar a los indicies del arreglo coleccionPalabras
 
             $partida = jugarWordix($indicePalabras[$indiceElegido], strtolower($usuarios));
+            
+            $resultadoPartidas = coleccionPartidas($partida);
+
             break;
         case 2: 
           echo 'ingrese su usuario: ';
           $usuarios = trim(fgets(STDIN));
 
-          $indicePalabras = cargarColeccionPalabras();
-
           $partida = jugarWordix(array_rand($indicePalabras,1), strtolower($usuarios)); //array_rand selecciona un indice random
-            break;
-        case 3: 
-            
+
           $resultadoPartidas = coleccionPartidas($partida);
-          
+
+          break;
+        case 3: 
+               
           echo "Ingrese el número de partida: ";
           
-          $numeroPartida = trim(fgets(STDIN));
+          $numeroPartida = solicitarNumeroEntre(1, count($resultadoPartidas));
           
-          
-          // echo $resultadoPartidas[$numeroPartida];
-          
-          /* foreach($resultadoPartidas as $numeroPartida) {
-            echo $numeroPartida . "\n";
-        } */
-
-
-        /**
-          aca empieza
-         echo 'ingrese el numero de la partida';
-        $numeroPartida = trim(fgets(STDIN));
-        $partida[$numeroPartida]= [
-        "partida Wordix" => $numeroPartida,
-        "palabraWordix" => "MUJER",
-        "jugador" => "jorge",
-        "intentos" => "6",
-        "puntaje" => "0"
-        ];
-      foreach ($partida as $estadisticas) {
-     echo "Partida WORDIX {$estadisticas["partida Wordix"]}: palabra {$estadisticas["palabraWordix"]}\njugador: {$estadisticas["jugador"]}\npuntaje: {$estadisticas["puntaje"]}\n";
-    }
-  if ($partida[$numeroPartida]["puntaje"]==0) {
-    echo 'Intento: No adivino la palabra';
-  } elseif ($partida[$numeroPartida]["intentos"] ==1){
-    echo "adivino la palabra en: {$partida[$numeroPartida]["intentos"]} intento";
-  } else {
-    echo "adivino la palabra en: {$partida[$numeroPartida]["intentos"]} intentos";
-  }
-*/
+          mostrarColeccionPartidas($resultadoPartidas,$numeroPartida);
 
             break;
           case 4: 

@@ -449,13 +449,46 @@ function jugarWordix($palabraWordix, $nombreUsuario){
 
 
 /**
- * Colección de partidas jugadas
+ * Incorpora una partida a la colección de partidas jugadas
  * @param int $partida
  * @return 
  *  */
 
+$listadoPartidas = [];
+
 function coleccionPartidas($partida){    
-    $listadoPartidas = [];
+
     array_push($listadoPartidas, $partida);
+    
     return $listadoPartidas;
+}
+
+/**
+ * Devuelve las partidas jugadas según su número de partida
+ * @param int $partidaNumero
+ * @param array $partida
+ */
+ 
+function mostrarColeccionPartidas($partida,$partidaNumero){
+ 
+ $partidaNumero=$partidaNumero-1;
+
+ $partida[$partidaNumero] = [
+        "partida Wordix" => $partidaNumero,
+        "palabraWordix" => "MUJER", 
+        "jugador" => "jorge",
+        "intentos" => "6",
+        "puntaje" => "0"
+ ];
+
+ foreach ($partida as $estadisticas) {
+        echo "Partida WORDIX {$estadisticas["partida Wordix"]}: palabra {$estadisticas["palabraWordix"]}\njugador: {$estadisticas["jugador"]}\npuntaje: {$estadisticas["puntaje"]}\n";
+    }
+ if ($partida[$partidaNumero]["puntaje"]==0) {
+    echo 'Intento: No adivino la palabra';
+ } elseif ($partida[$partidaNumero]["intentos"] ==1){
+    echo "adivino la palabra en: {$partida[$partidaNumero]["intentos"]} intento";
+ } else {
+    echo "adivino la palabra en: {$partida[$partidaNumero]["intentos"]} intentos";
+ }
 }
