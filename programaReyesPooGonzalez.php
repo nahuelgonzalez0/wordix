@@ -52,7 +52,7 @@
    foreach ($menuOpciones as $valor) {
      echo $valor. "\n";
    }
- 
+   echo "Ingrese una opcion: ";
    $opcion = solicitarNumeroEntre(1, 8);
  
    switch ($opcion) {
@@ -98,8 +98,10 @@
        break;
        
      case 5:
-       //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
- 
+      echo "Ingrese el nombre del jugador: ";
+      $usuario = trim(fgets(STDIN));
+      
+      
        break;
      case 6:
        //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3

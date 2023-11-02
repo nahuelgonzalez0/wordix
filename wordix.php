@@ -520,25 +520,23 @@ function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoP
  * @param string $nombre 
  * @param array $partidaListado
  */
-function primerPartidaGanadora($nombre, $partidaListado)
+function primerPartidaGanadora ($nombre,$partidaListado)
 {
-    //boolean $partidaGandora
-    //int $contador
+    //boolean $condicion
 
-    $partidaGanadora = null;
+    $condicion = false;
 
-    foreach ($partidaListado as $indice => $partida) { //$indice representa el índice del arreglo $partidaListado y $partida representa los valores asociado al índice
-        if (array_key_exists("jugador", $partida) && $partida["jugador"] === $nombre && $partida["puntaje"] > 0) {
-            //Verificamos que el jugador exista en la partida y que la partida sea del jugador, además que su puntaje sea mayor a 0
-            
-            $partidaGanadora = $partida;
-            mostrarColeccionPartidas($partidaListado, $indice + 1);
+    foreach ($partidaListado as $valor => $partida) {
+        if ($partida["jugador"] == $nombre && $partida["puntaje"] > 0) {
+            //Verifica que valor nombre exista en la clave "jugador" y que la clave "puntaje" tenga un valor mayor a 0
+            $condicion = true;
+            mostrarColeccionPartidas($partidaListado, $valor + 1);
             break;
-        }
+        } 
     }
 
-    if ($partidaGanadora === null) {
-        echo "El jugador $nombre no gano ninguna partida.\n";
+    if ($condicion == false){
+        echo "el jugador $nombre no gano ninguna partida \n";
     }
 }
 
