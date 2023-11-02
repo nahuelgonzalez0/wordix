@@ -39,7 +39,7 @@
  do {
  
    $menuOpciones = [
-     "Menú de opciones",
+     "\nMenú de opciones",
      "1) Jugar al wordix con una palabra elegida",
      "2) Jugar al wordix con una palabra aleatoria",
      "3) Mostrar una partida",
@@ -60,8 +60,7 @@
        echo 'ingrese su usuario: ';
        $usuarios = trim(fgets(STDIN));
  
-       echo 'ingrese un numero de palabra para jugar:';
- 
+       echo "Ingrese el numero de la palabra que desea jugar: ";
        $indiceElegido =  trim(fgets(STDIN)); // preguntar como limitar a los indicies del arreglo coleccionPalabras
  
        $partida = jugarWordix($indicePalabras[$indiceElegido], strtolower($usuarios));
@@ -92,9 +91,12 @@
  
        break;
      case 4:
-       //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
- 
+       echo "Ingrese su nombre: ";
+       $usuarios = trim(fgets(STDIN));
+
+       primerPartidaGanadora($usuarios, $resultadoPartidas);
        break;
+       
      case 5:
        //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
  
