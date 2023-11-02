@@ -541,3 +541,21 @@ function primerPartidaGanadora($nombre, $partidaListado)
         echo "El jugador $nombre no gano ninguna partida.\n";
     }
 }
+
+/**
+ * Devuelve el puntaje de cada usuario
+ * @param string $nombreUsuario
+ * @param array $lista
+ * @return int $acumulador
+ */
+function sumaPuntaje ($nombreUsuario, $lista){
+    //int $acumulador, $promedio, $indice, $parametro
+    $acumulador = 0;
+
+    foreach($lista as $partida){
+        if($partida["jugador"] === $nombreUsuario){
+            $acumulador = $acumulador + $partida["puntaje"];
+        }
+    }
+    return $acumulador;
+}
