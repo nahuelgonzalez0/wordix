@@ -157,15 +157,17 @@ function cargarColeccionPalabras()
  * Almacena las partidas del usuario
  * @return array
  */
-function cargarColeccionPartidas()
+function cargarColeccionPartidas() // modificado para que sea un arreglo multidimensional, por lo que los datos de la primer partida quedan como $coleccionPartida[0][*datos*]
 {
 
-    $coleccionPartida = [
-        "palabraWordix" => "MUJER",
-        "jugador" => "Tulio",
-        "intentos" => "1",
-        "puntaje" => "15"
-    ];
+    $coleccionPartida = array(
+        array(
+            "palabraWordix" => "MUJER",
+            "jugador" => "Tulio",
+            "intentos" => "1",
+            "puntaje" => "15"
+        ),
+    );
 
     return $coleccionPartida;
 }
@@ -374,26 +376,31 @@ function esIntentoGanado($estructuraPalabraIntento)
  * @param string $palabra
  * @return int
  */
-function obtenerPuntajeWordix($palabra)
+function obtenerPuntajeWordix($intentos, $palabra)
 {
     //int $puntaje, $i
     //bolean $condicion
     //string $palabraSeparada, $diccionario
 
     //Inicialización de variables
-    $condicion = false;
-    $diccionario = cargarColeccionPalabras();
-    $puntaje = CANT_INTENTOS;
+    //$condicion = false;
+    //$diccionario = cargarColeccionPalabras();
+    //$puntaje = CANT_INTENTOS;
 
-    while (!$condicion && $puntaje > 0) { //Para determinar el puntaje segun los intentos
+    if ($intentos <= 6) {
+        $puntaje = (CANT_INTENTOS + 1) - $intentos;
+    } else {
+        $puntaje = 0;
+    };
 
-        if ($palabra == array_rand($diccionario)) {
+    /*while (!$condicion && $puntaje > 0) { //Para determinar el puntaje segun los intentos
+
+        if ($palabra == $palabra) {
             $condicion = true;
         } else {
             $puntaje--;
         }
-    }
-
+    }*/
 
     if ($puntaje > 0) { //Para determinar el puntaje según la letra
         $palabraSeparada = str_split($palabra);
@@ -448,7 +455,7 @@ function jugarWordix($palabraWordix, $nombreUsuario)
 
     if ($ganoElIntento) {
         $nroIntento--;
-        $puntaje = obtenerPuntajeWordix($palabraWordix);
+        $puntaje = obtenerPuntajeWordix($nroIntento, $palabraWordix); // hay que cambiar las variables de entrada, que contemple los intentos
         echo "Adivinó la palabra Wordix en el intento " . $nroIntento . "!: " . $palabraIntento . " Obtuvo $puntaje puntos!";
     } else {
         $nroIntento = 0; //reset intento
@@ -469,48 +476,41 @@ function jugarWordix($palabraWordix, $nombreUsuario)
 
 /**
  * Incorpora una partida a la colección de partidas jugadas
- * @param int $partida
+ * @param array $partida
  * @return 
  *  */
 
-$listadoPartidas = [];
 
-function coleccionPartidas($partida)
+function coleccionPartidas($colePartidas, $partida)
 {
 
-    array_push($listadoPartidas, $partida);
+    array_push($colePartidas, $partida); // MODIFICADO PARA QUE HAGA EL ARREGLO
 
-    return $listadoPartidas;
+    return $colePartidas; // devuelve el arreglo multidimensional agregando un nuevo indice para cada nueva iteración del arreglo $partida, siempre lo incorpora al final
 }
 
 /**
  * Devuelve las partidas jugadas según su número de partida
  * @param int $partidaNumero
- * @param array $partida
+ * @param array $listadoPartidas
  */
 
-function mostrarColeccionPartidas($partida, $partidaNumero)
+function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoPartidas es el arreglo de la colección y $partidaNumero el índice que opera de número de partida
 {
 
-    $partidaNumero = $partidaNumero - 1;
+    $partidaNumero = $partidaNumero - 1; // Al numero ingresado por el usuario se le resta 1 para que coincida con el índice del arreglo $listadoPartidas
 
-    $partida[$partidaNumero] = [
-        "partida Wordix" => $partidaNumero,
-        "palabraWordix" => "MUJER",
-        "jugador" => "jorge",
-        "intentos" => "6",
-        "puntaje" => "0"
-    ];
-
-    foreach ($partida as $estadisticas) {
-        echo "Partida WORDIX {$estadisticas["partida Wordix"]}: palabra {$estadisticas["palabraWordix"]}\njugador: {$estadisticas["jugador"]}\npuntaje: {$estadisticas["puntaje"]}\n";
-    }
-
-    if ($partida[$partidaNumero]["puntaje"] == 0) {
-        echo 'Intento: No adivino la palabra';
-    } elseif ($partida[$partidaNumero]["intentos"] == 1) {
-        echo "adivino la palabra en: {$partida[$partidaNumero]["intentos"]} intento";
+    echo "***************************************************\n"; // separador estético
+    echo "Partida WORDIX " . "$partidaNumero" . ": " . "palabra " . $listadoPartidas[$partidaNumero]["palabraWordix"] . "\n"; //muestra el numero de partida y la palabra usada
+    echo "Jugador: " . $listadoPartidas[$partidaNumero]["jugador"] . "\n"; // muestra el nombre del jugador en el índice ingresado
+    echo "puntaje: " . $listadoPartidas[$partidaNumero]["puntaje"] . " puntos" . "\n"; // muestra el puntaje obtenido en el índice ingresado
+    if ($listadoPartidas[$partidaNumero]["puntaje"] == 0) {
+        echo 'Intento: No adivino la palabra'; // muestra en caso de que no se adivine la palabra durante la partida
+    } elseif ($listadoPartidas[$partidaNumero]["intentos"] == 1) {
+        echo "adivino la palabra en: {$listadoPartidas[$partidaNumero]["intentos"]} intento"; // muestra si el intento es 1 (en singular la palabra intento)
     } else {
-        echo "adivino la palabra en: {$partida[$partidaNumero]["intentos"]} intentos";
+        echo "adivino la palabra en: {$listadoPartidas[$partidaNumero]["intentos"]} intentos"; // muestra el mensaje si los intentos fueron más (palabra intento en plural)
     }
+    echo "\n"; // espacio luego del texto, para no agregarlo en cada if/elseif/else.
+    echo "***************************************************\n"; // separador estético
 }
