@@ -163,8 +163,8 @@ function cargarColeccionPartidas() // modificado para que sea un arreglo multidi
     $coleccionPartida = array(
         array(
             "palabraWordix" => "MUJER",
-            "jugador" => "Tulio",
-            "intentos" => "1",
+            "jugador" => "tulio",
+            "intentos" => 1,
             "puntaje" => "15"
         ),
     );
@@ -520,7 +520,7 @@ function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoP
  * @param string $nombre 
  * @param array $partidaListado
  */
-function primerPartidaGanadora ($nombre,$partidaListado)
+function primerPartidaGanadora($nombre, $partidaListado)
 {
     //boolean $condicion
 
@@ -532,10 +532,10 @@ function primerPartidaGanadora ($nombre,$partidaListado)
             $condicion = true;
             mostrarColeccionPartidas($partidaListado, $valor + 1);
             break;
-        } 
+        }
     }
 
-    if ($condicion == false){
+    if ($condicion == false) {
         echo "el jugador $nombre no gano ninguna partida \n";
     }
 }
@@ -546,14 +546,54 @@ function primerPartidaGanadora ($nombre,$partidaListado)
  * @param array $lista
  * @return int $acumulador
  */
-function sumaPuntaje ($nombreUsuario, $lista){
+function sumaPuntaje($nombreUsuario, $lista)
+{
     //int $acumulador, $promedio, $indice, $parametro
-    $acumulador = 0;
+    //array $estadistica
 
-    foreach($lista as $partida){
-        if($partida["jugador"] === $nombreUsuario){
+    $acumulador = 0;
+    $contadorGanadas = 0;
+    $contadorJugadas = 0;
+    $contadorIntentos = 0;
+
+    $estadistica = array(
+        "suma puntaje" => 0,
+        "partidas ganadas" => 0,
+        "partidas jugadas" => 0,
+        "porcentaje victorias" => 0,
+        0 => null,
+    );
+
+    foreach ($lista as $partida) {
+        if ($partida["jugador"] === $nombreUsuario) {
             $acumulador = $acumulador + $partida["puntaje"];
+            $estadistica["suma puntaje"] = $acumulador;
+        }
+        if ($partida["jugador"] === $nombreUsuario) {
+            if ($partida["puntaje"] > 0) {
+                $contadorGanadas++;
+                $estadistica["partidas ganadas"] = $contadorGanadas;
+            }
+            if ($partida["puntaje"] >= 0) {
+                $contadorJugadas++;
+                $estadistica["partidas jugadas"] = $contadorJugadas;
+            }
+        }
+
+
+        for ($intentos = 1; $intentos <= 6; $intentos++) {
+            foreach ($lista as $partida) {
+                if ($partida["jugador"] === $nombreUsuario && $partida["intentos"] === $intentos) {
+                    $contadorIntentos++;
+                }
+                array_push($estadistica, $contadorIntentos);
+                $contadorIntentos = 0;
+                break;
+            }
         }
     }
-    return $acumulador;
+
+    $estadistica["porcentaje victorias"] = (int)($contadorGanadas / $contadorJugadas) * 100;
+
+    return $estadistica;
 }

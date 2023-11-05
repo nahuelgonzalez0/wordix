@@ -101,6 +101,9 @@
       echo "Ingrese el nombre del jugador: ";
       $usuario = trim(fgets(STDIN));
       
+      $estadisticaUsuario = sumaPuntaje($usuario,$resultadoPartidas);
+
+      print_r($estadisticaUsuario);
       
        break;
      case 6:
