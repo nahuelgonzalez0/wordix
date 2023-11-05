@@ -56,18 +56,20 @@
    $opcion = solicitarNumeroEntre(1, 8);
  
    switch ($opcion) {
-     case 1:
-       echo 'ingrese su usuario: ';
-       $usuarios = trim(fgets(STDIN));
- 
-       echo "Ingrese el numero de la palabra que desea jugar: ";
-       $indiceElegido =  trim(fgets(STDIN)); // preguntar como limitar a los indicies del arreglo coleccionPalabras
- 
-       $partida = jugarWordix($indicePalabras[$indiceElegido], strtolower($usuarios));
- 
-       $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
- 
-       break;
+    case 1:
+      echo 'ingrese su usuario: ';
+      $usuarios = trim(fgets(STDIN));
+
+      $cantidad = count($indicePalabras);
+
+      echo "Hay $cantidad palabras cargadas, ingrese con cual que desea jugar: ";
+      $indiceElegido =  solicitarNumeroEntre(1, $cantidad);
+
+      $partida = jugarWordix($indicePalabras[(int)$indiceElegido - 1], strtolower($usuarios));
+
+      $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
+
+      break;
      case 2:
        echo 'ingrese su usuario: ';
        $usuarios = trim(fgets(STDIN));
