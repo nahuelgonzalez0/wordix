@@ -102,9 +102,7 @@
       $usuario = trim(fgets(STDIN));
       
       $estadisticaUsuario = sumaPuntaje($usuario,$resultadoPartidas);
-
-      print_r($estadisticaUsuario);
-      
+      estadisticas ($estadisticaUsuario,$usuario);
        break;
      case 6:
        //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3

@@ -561,7 +561,12 @@ function sumaPuntaje($nombreUsuario, $lista)
         "partidas ganadas" => 0,
         "partidas jugadas" => 0,
         "porcentaje victorias" => 0,
-        0 => null,
+        1 => 0,
+        2 => 0,
+        3 => 0,
+        4 => 0,
+        5 => 0,
+        6 => 0
     );
 
     foreach ($lista as $partida) {
@@ -580,20 +585,31 @@ function sumaPuntaje($nombreUsuario, $lista)
             }
         }
 
-
         for ($intentos = 1; $intentos <= 6; $intentos++) {
             foreach ($lista as $partida) {
                 if ($partida["jugador"] === $nombreUsuario && $partida["intentos"] === $intentos) {
                     $contadorIntentos++;
+                    $estadistica[$intentos] = $contadorIntentos;
                 }
-                array_push($estadistica, $contadorIntentos);
-                $contadorIntentos = 0;
-                break;
             }
+            $contadorIntentos = 0;
         }
     }
 
     $estadistica["porcentaje victorias"] = round(($estadistica["partidas ganadas"] / $estadistica["partidas jugadas"]) * 100, 2);
 
     return $estadistica;
+}
+function estadisticas ($estadistica,$nombreUsuario) {
+    echo "***************************************************\n"; // separador estético
+    echo "Jugador: " .$nombreUsuario. "\n"; // muestra el nombre del jugador
+    echo "Partidas: " .$estadistica['partidas jugadas'] . "\n"; //muestra la cantidad de partidas
+    echo "puntaje Total: " . $estadistica["suma puntaje"] . "\n"; // muestra el puntaje total
+    echo "Victorias: " . $estadistica["partidas ganadas"] . "\n"; // muestra el puntaje totalaaada
+    echo "Porcentaje Victorias: " . $estadistica["porcentaje victorias"] . "\n"; // muestra el puntaje total
+    echo "Adivinadas: \n";
+    for ($cont=1;$cont<=6;$cont++){
+        echo "\t Intento $cont: ".$estadistica[$cont]."\n";
+    }
+    echo "***************************************************\n"; // separador estético
 }
