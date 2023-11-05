@@ -593,7 +593,7 @@ function sumaPuntaje($nombreUsuario, $lista)
         }
     }
 
-    $estadistica["porcentaje victorias"] = (int)($contadorGanadas / $contadorJugadas) * 100;
+    $estadistica["porcentaje victorias"] = round(($estadistica["partidas ganadas"] / $estadistica["partidas jugadas"]) * 100, 2);
 
     return $estadistica;
 }
