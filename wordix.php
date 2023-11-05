@@ -600,16 +600,23 @@ function sumaPuntaje($nombreUsuario, $lista)
 
     return $estadistica;
 }
-function estadisticas ($estadistica,$nombreUsuario) {
+
+/**
+ * Devuelve por pantalla la estadisticas del jugador
+ * @param array $estadistica
+ * @param string $nombreUsuario
+ */
+function estadisticas($estadistica, $nombreUsuario)
+{
     echo "***************************************************\n"; // separador estético
-    echo "Jugador: " .$nombreUsuario. "\n"; // muestra el nombre del jugador
-    echo "Partidas: " .$estadistica['partidas jugadas'] . "\n"; //muestra la cantidad de partidas
+    echo "Jugador: " . $nombreUsuario . "\n"; // muestra el nombre del jugador
+    echo "Partidas: " . $estadistica['partidas jugadas'] . "\n"; //muestra la cantidad de partidas
     echo "puntaje Total: " . $estadistica["suma puntaje"] . "\n"; // muestra el puntaje total
     echo "Victorias: " . $estadistica["partidas ganadas"] . "\n"; // muestra el puntaje totalaaada
     echo "Porcentaje Victorias: " . $estadistica["porcentaje victorias"] . "\n"; // muestra el puntaje total
     echo "Adivinadas: \n";
-    for ($cont=1;$cont<=6;$cont++){
-        echo "\t Intento $cont: ".$estadistica[$cont]."\n";
+    for ($cont = 1; $cont <= 6; $cont++) {
+        echo "\t Intento $cont: " . $estadistica[$cont] . "\n";
     }
     echo "***************************************************\n"; // separador estético
 }
