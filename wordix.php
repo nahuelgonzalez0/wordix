@@ -561,7 +561,6 @@ function sumaPuntaje($nombreUsuario, $lista)
         "partidas ganadas" => 0,
         "partidas jugadas" => 0,
         "porcentaje victorias" => 0,
-        0 => null,
     );
 
     foreach ($lista as $partida) {
@@ -585,11 +584,10 @@ function sumaPuntaje($nombreUsuario, $lista)
             foreach ($lista as $partida) {
                 if ($partida["jugador"] === $nombreUsuario && $partida["intentos"] === $intentos) {
                     $contadorIntentos++;
+                    $estadistica[$intentos] = $contadorIntentos;
                 }
-                array_push($estadistica, $contadorIntentos);
-                $contadorIntentos = 0;
-                break;
             }
+            $contadorIntentos = 0;
         }
     }
 
