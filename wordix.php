@@ -561,12 +561,15 @@ function sumaPuntaje($nombreUsuario, $lista)
         "partidas ganadas" => 0,
         "partidas jugadas" => 0,
         "porcentaje victorias" => 0,
+<<<<<<< HEAD
         1 => 0,
         2 => 0,
         3 => 0,
         4 => 0,
         5 => 0,
         6 => 0
+=======
+>>>>>>> 35171c00c4ae61a4012a3f8c252d79af7f2f225f
     );
 
     foreach ($lista as $partida) {
