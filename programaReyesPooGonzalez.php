@@ -107,8 +107,8 @@
       estadisticas ($estadisticaUsuario,$usuario);
        break;
      case 6:
-       //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
- 
+       uasort($resultadoPartidas, 'cmp'); // uasort — Ordena un array con una función de comparación definida por el usuario y mantiene la asociación de índices
+       print_r($resultadoPartidas); // print_r — Imprime información legible para humanos sobre una variable
        break;
  
        //...

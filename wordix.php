@@ -620,3 +620,17 @@ function estadisticas($estadistica, $nombreUsuario)
     }
     echo "***************************************************\n"; // separador estético
 }
+
+/**
+ * ordena el arreglo de partida por jugador y por palabra, ambas se ordenan en forma alfabetica
+ * @param array $a
+ * @param array $b
+ * @return int
+ */
+function cmp($a, $b) {
+    if ($a['jugador'] == $b['jugador']) {
+        return strcmp($a['palabra'], $b['palabra']);
+    }
+    return strcmp($a['jugador'], $b['jugador']); 
+    //lo que hace la funcion strcmp es que compara las cadenas de caracteres a nivel binario y devuelve un valor entero Devuelve < 0 si str1 es menor que str2; > 0 si str1 es mayor que str2 y 0 si son iguales
+}
