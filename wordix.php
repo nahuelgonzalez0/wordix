@@ -190,6 +190,22 @@ function esPalabra($cadena)
     return $esLetra;
 }
 
+/**
+ * Valida si el primer caracter del nombre del usuario es una letra
+ * @return string
+ */
+function validacionUsuario()
+{
+    echo "Ingrese su usuario: ";
+    $nombreUsuario = trim(fgets(STDIN));
+
+    while ($nombreUsuario[0] != ctype_alpha($nombreUsuario[0])){//Verifica que el primer caracter sea una letra y se repite hasta que cumpla la condicion
+        echo "Ingrese su nombre con el primer caracter como una letra: ";
+        $nombreUsuario = trim(fgets(STDIN));
+    }
+
+    return ($nombreUsuario);
+}
 
 /**
  * Le solicita al usuario una palabra de cinco letras y verifica que sea de cinco letras
