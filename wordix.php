@@ -676,6 +676,16 @@ function cmp($a, $b) {
 }
 
 /**
+ * imprime el arreglo de partida por jugador y por palabra, ambas se ordenan en forma alfabetica
+ * @param array $coleccion
+ * 
+ */
+function imprimirPartidasOrdenandas($coleccion){
+    uasort($coleccion, 'cmp'); // uasort — Ordena un array con una función de comparación definida por el usuario y mantiene la asociación de índices
+    print_r($coleccion); // print_r — Imprime información legible para humanos sobre una variable
+}
+
+/**
  * Permite agregar una palabra al arreglo cargarColeccionPalabras
  * @return array
  */

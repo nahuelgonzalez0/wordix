@@ -85,12 +85,12 @@ do {
     case 5:
       $usuarios = validacionUsuario();
 
-      $estadisticaUsuario = sumaPuntaje($usuario, $resultadoPartidas);
-      estadisticas($estadisticaUsuario, $usuario);
+      $estadisticaUsuario = sumaPuntaje($usuarios, $resultadoPartidas);
+      estadisticas($estadisticaUsuario, $usuarios);
       break;
     case 6:
-      uasort($resultadoPartidas, 'cmp'); // uasort — Ordena un array con una función de comparación definida por el usuario y mantiene la asociación de índices
-      print_r($resultadoPartidas); // print_r — Imprime información legible para humanos sobre una variable
+      
+      imprimirPartidasOrdenandas($resultadoPartidas);
       break;
 
     case 7:
