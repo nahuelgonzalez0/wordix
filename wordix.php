@@ -222,6 +222,7 @@ function validacionUsuario()
 {
     echo "Ingrese su usuario: ";
     $nombreUsuario = trim(fgets(STDIN));
+    $nombreUsuario = strtolower($nombreUsuario); // Convierte el string a minúsculas
 
     while ($nombreUsuario[0] != ctype_alpha($nombreUsuario[0])) { //Verifica que el primer caracter sea una letra y se repite hasta que cumpla la condicion
         echo "Ingrese su nombre con el primer caracter como una letra: ";
@@ -240,9 +241,9 @@ function leerPalabra5Letras()
     //string $palabra
     echo "Ingrese una palabra de 5 letras: ";
     $palabra = trim(fgets(STDIN));
-    $palabra  = strtoupper($palabra); // convierte el string a mayúsculas
+    $palabra  = strtoupper($palabra); // Convierte el string a mayúsculas
 
-    while ((strlen($palabra) != 5) || !esPalabra($palabra)) { // verifica que el string palabra tenga 5 caractéres y no contiene números ni caracteres especiales
+    while ((strlen($palabra) != 5) || !esPalabra($palabra)) { // Verifica que el string palabra tenga 5 caractéres y no contiene números ni caracteres especiales
         echo "Debe ingresar una palabra de 5 letras:";
         $palabra = strtoupper(trim(fgets(STDIN))); // convierte el string a mayúsculas
     }
