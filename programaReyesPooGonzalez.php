@@ -96,6 +96,6 @@ do {
     case 7:
       $palabras = leerPalabra5Letras();
 
-      array_push($indicePalabras, $palabras);
+      $indicePalabras = agregarPalabra($indicePalabras, $palabras);
   }
 } while ($opcion != 8);

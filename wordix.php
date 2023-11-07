@@ -674,3 +674,14 @@ function cmp($a, $b) {
     return strcmp($a['jugador'], $b['jugador']); 
     //lo que hace la funcion strcmp es que compara las cadenas de caracteres a nivel binario y devuelve un valor entero Devuelve < 0 si str1 es menor que str2; > 0 si str1 es mayor que str2 y 0 si son iguales
 }
+
+/**
+ * Permite agregar una palabra al arreglo cargarColeccionPalabras
+ * @return array
+ */
+function agregarPalabra ($bibliotecaPalabras, $palabra){
+    
+    array_push($bibliotecaPalabras, $palabra);
+
+return $bibliotecaPalabras;
+}
