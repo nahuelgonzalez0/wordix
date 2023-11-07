@@ -518,8 +518,8 @@ function jugarWordix($palabraWordix, $nombreUsuario)
  * Incorpora una partida a la colección de partidas jugadas
  * @param array $partida
  * @return 
- *  */
-
+ *  
+ */
 
 function coleccionPartidas($colePartidas, $partida)
 {
@@ -584,7 +584,7 @@ function primerPartidaGanadora($nombre, $partidaListado)
  * Devuelve el puntaje de cada usuario
  * @param string $nombreUsuario
  * @param array $lista
- * @return int $acumulador
+ * @return array
  */
 function sumaPuntaje($nombreUsuario, $lista)
 {

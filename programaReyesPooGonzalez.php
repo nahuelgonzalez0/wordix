@@ -87,9 +87,9 @@ do {
 
       $estadisticaUsuario = sumaPuntaje($usuarios, $resultadoPartidas);
       estadisticas($estadisticaUsuario, $usuarios);
+      
       break;
     case 6:
-      
       imprimirPartidasOrdenandas($resultadoPartidas);
       break;
 
