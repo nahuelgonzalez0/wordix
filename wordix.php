@@ -223,7 +223,7 @@ function validacionUsuario()
     echo "Ingrese su usuario: ";
     $nombreUsuario = trim(fgets(STDIN));
 
-    while ($nombreUsuario[0] != ctype_alpha($nombreUsuario[0])){//Verifica que el primer caracter sea una letra y se repite hasta que cumpla la condicion
+    while ($nombreUsuario[0] != ctype_alpha($nombreUsuario[0])) { //Verifica que el primer caracter sea una letra y se repite hasta que cumpla la condicion
         echo "Ingrese su nombre con el primer caracter como una letra: ";
         $nombreUsuario = trim(fgets(STDIN));
     }
@@ -667,11 +667,12 @@ function estadisticas($estadistica, $nombreUsuario)
  * @param array $b
  * @return int
  */
-function cmp($a, $b) {
+function cmp($a, $b)
+{
     if ($a['jugador'] == $b['jugador']) {
         return strcmp($a['palabraWordix'], $b['palabraWordix']);
     }
-    return strcmp($a['jugador'], $b['jugador']); 
+    return strcmp($a['jugador'], $b['jugador']);
     //lo que hace la funcion strcmp es que compara las cadenas de caracteres a nivel binario y devuelve un valor entero Devuelve < 0 si str1 es menor que str2; > 0 si str1 es mayor que str2 y 0 si son iguales
 }
 
@@ -680,7 +681,8 @@ function cmp($a, $b) {
  * @param array $coleccion
  * 
  */
-function imprimirPartidasOrdenandas($coleccion){
+function imprimirPartidasOrdenandas($coleccion)
+{
     uasort($coleccion, 'cmp'); // uasort — Ordena un array con una función de comparación definida por el usuario y mantiene la asociación de índices
     print_r($coleccion); // print_r — Imprime información legible para humanos sobre una variable
 }
@@ -689,9 +691,10 @@ function imprimirPartidasOrdenandas($coleccion){
  * Permite agregar una palabra al arreglo cargarColeccionPalabras
  * @return array
  */
-function agregarPalabra ($bibliotecaPalabras, $palabra){
-    
+function agregarPalabra($bibliotecaPalabras, $palabra)
+{
+
     array_push($bibliotecaPalabras, $palabra);
 
-return $bibliotecaPalabras;
+    return $bibliotecaPalabras;
 }
