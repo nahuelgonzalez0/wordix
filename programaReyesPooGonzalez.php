@@ -37,21 +37,8 @@ $resultadoPartidas = cargarColeccionPartidas(); // Inicializa el arreglo con el 
 
 
 do {
+  $menu = seleccionarOpcion();
 
-  $menuOpciones = [
-    "\nMenú de opciones",
-    "1) Jugar al wordix con una palabra elegida",
-    "2) Jugar al wordix con una palabra aleatoria",
-    "3) Mostrar una partida",
-    "4) Mostrar la primer partida ganadora",
-    "5) Mostrar resumen de Jugador",
-    "6) Mostrar listado de partidas ordenadas por jugador y por palabra",
-    "7) Agregar una palabra de 5 letras a Wordix",
-    "8) salir"
-  ];
-  foreach ($menuOpciones as $valor) {
-    echo $valor . "\n";
-  }
   echo "Ingrese una opcion: ";
   $opcion = solicitarNumeroEntre(1, 8);
 
@@ -80,7 +67,6 @@ do {
 
       break;
     case 3:
-
       echo "Ingrese el número de partida: ";
 
       $cantidad = count($resultadoPartidas); // devuelve la cantidad de elementos en el arreglo multidimensional $resultadoPartidas
@@ -91,15 +77,13 @@ do {
 
       break;
     case 4:
-      echo "Ingrese su nombre: ";
-      $usuarios = trim(fgets(STDIN));
+      $usuarios = validacionUsuario();
 
       primerPartidaGanadora($usuarios, $resultadoPartidas);
       break;
 
     case 5:
-      echo "Ingrese el nombre del jugador: ";
-      $usuario = trim(fgets(STDIN));
+      $usuarios = validacionUsuario();
 
       $estadisticaUsuario = sumaPuntaje($usuario, $resultadoPartidas);
       estadisticas($estadisticaUsuario, $usuario);

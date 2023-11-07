@@ -173,6 +173,30 @@ function cargarColeccionPartidas() // modificado para que sea un arreglo multidi
 }
 
 /**
+ * Muestra por pantalla las opciones que hay para elegir
+ * @return array
+ */
+function seleccionarOpcion()
+{
+    $menuOpciones = [
+        "\nMenú de opciones",
+        "1) Jugar al wordix con una palabra elegida",
+        "2) Jugar al wordix con una palabra aleatoria",
+        "3) Mostrar una partida",
+        "4) Mostrar la primer partida ganadora",
+        "5) Mostrar resumen de Jugador",
+        "6) Mostrar listado de partidas ordenadas por jugador y por palabra",
+        "7) Agregar una palabra de 5 letras a Wordix",
+        "8) salir"
+    ];
+    foreach ($menuOpciones as $valor) {
+        echo $valor . "\n";
+    }
+
+    return $menuOpciones;
+}
+
+/**
  * Verifica si la palabra ingresada por el usuario no contiene numeros ni caracteres especiales
  * @param string $cadena 
  * @return boolean 
