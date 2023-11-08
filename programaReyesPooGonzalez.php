@@ -33,7 +33,7 @@ do {
   switch ($opcion) {
     //Switch corresponde a la estructura de controles alternativas (if, elseif)
     case 1:
-      $usuarios = validacionUsuario();
+      $usuarios = solicitarJugador();
 
       $cantidad = count($indicePalabras);
 
@@ -46,7 +46,7 @@ do {
 
       break;
     case 2:
-      $usuarios = validacionUsuario();
+      $usuarios = solicitarJugador();
 
       $indiceRandom = array_rand($indicePalabras); //array_rand selecciona un indice random
 
@@ -66,12 +66,12 @@ do {
 
       break;
     case 4:
-      $usuarios = validacionUsuario();
+      $usuarios = solicitarJugador();
 
       primerPartidaGanadora($usuarios, $resultadoPartidas);
       break;
     case 5:
-      $usuarios = validacionUsuario();
+      $usuarios = solicitarJugador();
 
       estadisticas($usuarios, $resultadoPartidas);
       
