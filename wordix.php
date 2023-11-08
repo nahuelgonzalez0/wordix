@@ -292,9 +292,11 @@ function solicitarJugador()
  * Le solicita al usuario una palabra de cinco letras y verifica que sea de cinco letras
  * @return string
  */
-function leerPalabra5Letras()
+function leerPalabra5Letras($nombreJugador)
 {
     //string $palabra
+    
+    $resultados = cargarPartidas();
 
     echo "Ingrese una palabra de 5 letras: ";
     $palabra = trim(fgets(STDIN));
@@ -304,8 +306,11 @@ function leerPalabra5Letras()
         echo "Debe ingresar una palabra de 5 letras:";
         $palabra = strtoupper(trim(fgets(STDIN))); // convierte el string a mayúsculas
     }
+
     return $palabra; //retorna la palabra ingresada
 }
+    
+    
 
 
 /**
@@ -537,7 +542,7 @@ function jugarWordix($palabraWordix, $nombreUsuario)
     do {
 
         echo "Comenzar con el Intento " . $nroIntento . ":\n";
-        $palabraIntento = leerPalabra5Letras();
+        $palabraIntento = leerPalabra5Letras($nombreUsuario);
         $indiceIntento = $nroIntento - 1;
         $arregloDeIntentosWordix = analizarPalabraIntento($palabraWordix, $arregloDeIntentosWordix, $palabraIntento);
         $teclado = actualizarTeclado($teclado, $arregloDeIntentosWordix[$indiceIntento]);
@@ -623,7 +628,7 @@ function primerPartidaGanadora($nombre, $partidaListado)
 
     $condicion = false;
 
-    foreach ($partidaListado as $valor => $partida) {
+    foreach ($partidaListado as $valor => $partida) { // CAMBIAR A RECORRIDO PARCIAL
         if ($partida["jugador"] == $nombre && $partida["puntaje"] > 0) {
             //Verifica que valor nombre exista en la clave "jugador" y que la clave "puntaje" tenga un valor mayor a 0
             $condicion = true;
