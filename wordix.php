@@ -593,11 +593,12 @@ function coleccionPartidas($colePartidas, $partida)
  */
 function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoPartidas es el arreglo de la colección y $partidaNumero el índice que opera de número de partida
 {
-
+    // int $partidaMensaje
+    $partidaMensaje = $partidaNumero; // variable usada para que coincida el numero de palabra mostrado con el seleccionado por el usuario
     $partidaNumero = $partidaNumero - 1; // Al numero ingresado por el usuario se le resta 1 para que coincida con el índice del arreglo $listadoPartidas
 
     echo "***************************************************\n"; // separador estético
-    echo "Partida WORDIX " . "$partidaNumero" . ": " . "palabra " . $listadoPartidas[$partidaNumero]["palabraWordix"] . "\n"; //muestra el numero de partida y la palabra usada
+    echo "Partida WORDIX " . "$partidaMensaje" . ": " . "palabra " . $listadoPartidas[$partidaNumero]["palabraWordix"] . "\n"; //muestra el numero de partida y la palabra usada
     echo "Jugador: " . $listadoPartidas[$partidaNumero]["jugador"] . "\n"; // muestra el nombre del jugador en el índice ingresado
     echo "puntaje: " . $listadoPartidas[$partidaNumero]["puntaje"] . " puntos" . "\n"; // muestra el puntaje obtenido en el índice ingresado
     if ($listadoPartidas[$partidaNumero]["puntaje"] == 0) {
