@@ -581,7 +581,7 @@ function jugarWordix($palabraWordix, $nombreUsuario)
 function coleccionPartidas($colePartidas, $partida)
 {
 
-    array_push($colePartidas, $partida); // MODIFICADO PARA QUE HAGA EL ARREGLO
+    array_push($colePartidas, $partida); // La función predefinida array_push inserta uno o más elementos al final de un arreglo
 
     return $colePartidas; // devuelve el arreglo multidimensional agregando un nuevo indice para cada nueva iteración del arreglo $partida, siempre lo incorpora al final
 }
@@ -717,11 +717,11 @@ function estadisticas($nombreUsuario, $lista)
 function cmp($a, $b)
 {
     if ($a['jugador'] == $b['jugador']) {
-        return strcmp($a['palabraWordix'], $b['palabraWordix']);
+        return $a['palabraWordix'] <=> $b['palabraWordix']; // El operador <=> resuelve si una variable es mayor, igual o menor que la otra
+    } else {
+    return $a['jugador'] <=> $b['jugador']; 
     }
-    return strcmp($a['jugador'], $b['jugador']);
-    //lo que hace la funcion strcmp es que compara las cadenas de caracteres a nivel binario y devuelve un valor entero Devuelve < 0 si str1 es menor que str2; > 0 si str1 es mayor
-    //que str2 y 0 si son iguales
+    
 }
 
 /**
