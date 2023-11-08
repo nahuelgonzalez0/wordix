@@ -20,7 +20,7 @@ include_once("wordix.php");
 //Inicialización de variables:
 
 $indicePalabras = cargarColeccionPalabras(); // Inicializa el arreglo con la coleccion de palabras del juego
-$resultadoPartidas = cargarColeccionPartidas(); // Inicializa el arreglo con el historial de partidas
+$resultadoPartidas = cargarPartidas(); // Inicializa el arreglo con el historial de partidas
 
 //Proceso:
 
@@ -70,18 +70,15 @@ do {
 
       primerPartidaGanadora($usuarios, $resultadoPartidas);
       break;
-
     case 5:
       $usuarios = validacionUsuario();
 
-      $estadisticaUsuario = sumaPuntaje($usuarios, $resultadoPartidas);
-      estadisticas($estadisticaUsuario, $usuarios);
+      estadisticas($usuarios, $resultadoPartidas);
       
       break;
     case 6:
       imprimirPartidasOrdenandas($resultadoPartidas);
       break;
-
     case 7:
       $palabras = leerPalabra5Letras();
 

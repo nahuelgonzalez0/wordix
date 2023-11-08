@@ -157,7 +157,7 @@ function cargarColeccionPalabras()
  * Almacena las partidas del usuario
  * @return array
  */
-function cargarColeccionPartidas() // modificado para que sea un arreglo multidimensional, por lo que los datos de la primer partida quedan como $coleccionPartida[0][*datos*]
+function cargarPartidas() // modificado para que sea un arreglo multidimensional, por lo que los datos de la primer partida quedan como $coleccionPartida[0][*datos*]
 {
 
     $coleccionPartida = array(
@@ -166,6 +166,60 @@ function cargarColeccionPartidas() // modificado para que sea un arreglo multidi
             "jugador" => "tulio",
             "intentos" => 1,
             "puntaje" => "15"
+        ),
+        array(
+            "palabraWordix" => "GATOS",
+            "jugador" => "tulio",
+            "intentos" => 4,
+            "puntaje" => "13"
+        ),
+        array(
+            "palabraWordix" => "NAVES",
+            "jugador" => "tulio",
+            "intentos" => 2,
+            "puntaje" => "16"
+        ),
+        array(
+            "palabraWordix" => "FUEGO",
+            "jugador" => "tulio",
+            "intentos" => 0,
+            "puntaje" => "0"
+        ),
+        array(
+            "palabraWordix" => "ARBOL",
+            "jugador" => "ema",
+            "intentos" => 1,
+            "puntaje" => "15"
+        ),
+        array(
+            "palabraWordix" => "TINTO",
+            "jugador" => "ema",
+            "intentos" => 0,
+            "puntaje" => "0"
+        ),
+        array(
+            "palabraWordix" => "GOTAS",
+            "jugador" => "ema",
+            "intentos" => 5,
+            "puntaje" => "12"
+        ),
+        array(
+            "palabraWordix" => "PIANO",
+            "jugador" => "koda",
+            "intentos" => 3,
+            "puntaje" => "13"
+        ),
+        array(
+            "palabraWordix" => "MANOS",
+            "jugador" => "koda",
+            "intentos" => 6,
+            "puntaje" => "11"
+        ),
+        array(
+            "palabraWordix" => "MELON",
+            "jugador" => "koda",
+            "intentos" => 0,
+            "puntaje" => "0"
         ),
     );
 
@@ -184,7 +238,7 @@ function seleccionarOpcion()
         "2) Jugar al wordix con una palabra aleatoria",
         "3) Mostrar una partida",
         "4) Mostrar la primer partida ganadora",
-        "5) Mostrar resumen de Jugador",
+        "5) Mostrar resumen de jugador",
         "6) Mostrar listado de partidas ordenadas por jugador y por palabra",
         "7) Agregar una palabra de 5 letras a Wordix",
         "8) salir"
@@ -583,15 +637,15 @@ function primerPartidaGanadora($nombre, $partidaListado)
 }
 
 /**
- * Devuelve el puntaje de cada usuario
+ * Devuelve las estadísticas de un usuario ingresado
  * @param string $nombreUsuario
  * @param array $lista
- * @return array
  */
-function sumaPuntaje($nombreUsuario, $lista)
+function estadisticas($nombreUsuario, $lista)
 {
-    //int $acumulador, $promedio, $indice, $parametro
+    //int $acumulador, $contadorGanadas, $contadorJugadas, $contadorIntentos
     //array $estadistica
+    
 
     $acumulador = 0;
     $contadorGanadas = 0;
@@ -599,31 +653,31 @@ function sumaPuntaje($nombreUsuario, $lista)
     $contadorIntentos = 0;
 
     $estadistica = array(
-        "suma puntaje" => 0,
-        "partidas ganadas" => 0,
-        "partidas jugadas" => 0,
-        "porcentaje victorias" => 0,
-        1 => 0,
-        2 => 0,
-        3 => 0,
-        4 => 0,
-        5 => 0,
-        6 => 0
+        "jugador" => $nombreUsuario,
+        "partidas" => 0,
+        "puntaje" => 0,
+        "victorias" => 0,
+        "intento1" => 0,
+        "intento2" => 0,
+        "intento3" => 0,
+        "intento4" => 0,
+        "intento5" => 0,
+        "intento6" => 0
     );
 
     foreach ($lista as $partida) {
         if ($partida["jugador"] === $nombreUsuario) {
             $acumulador = $acumulador + $partida["puntaje"];
-            $estadistica["suma puntaje"] = $acumulador;
+            $estadistica["puntaje"] = $acumulador;
         }
         if ($partida["jugador"] === $nombreUsuario) {
             if ($partida["puntaje"] > 0) {
                 $contadorGanadas++;
-                $estadistica["partidas ganadas"] = $contadorGanadas;
+                $estadistica["victorias"] = $contadorGanadas;
             }
             if ($partida["puntaje"] >= 0) {
                 $contadorJugadas++;
-                $estadistica["partidas jugadas"] = $contadorJugadas;
+                $estadistica["partidas"] = $contadorJugadas;
             }
         }
 
@@ -631,38 +685,26 @@ function sumaPuntaje($nombreUsuario, $lista)
             foreach ($lista as $partida) {
                 if ($partida["jugador"] === $nombreUsuario && $partida["intentos"] === $intentos) {
                     $contadorIntentos++;
-                    $estadistica[$intentos] = $contadorIntentos;
+                    $estadistica["intento$intentos"] = $contadorIntentos;
                 }
             }
             $contadorIntentos = 0;
         }
     }
 
-    $estadistica["porcentaje victorias"] = round(($estadistica["partidas ganadas"] / $estadistica["partidas jugadas"]) * 100, 2);
-
-    return $estadistica;
-}
-
-/**
- * Devuelve por pantalla la estadisticas del jugador
- * @param array $estadistica
- * @param string $nombreUsuario
- */
-function estadisticas($estadistica, $nombreUsuario)
-{
-    //int $cont
-
     echo "***************************************************\n"; // separador estético
-    echo "Jugador: " . $nombreUsuario . "\n"; // muestra el nombre del jugador
-    echo "Partidas: " . $estadistica['partidas jugadas'] . "\n"; //muestra la cantidad de partidas
-    echo "puntaje Total: " . $estadistica["suma puntaje"] . "\n"; // muestra el puntaje total
-    echo "Victorias: " . $estadistica["partidas ganadas"] . "\n"; // muestra el puntaje totalaaada
-    echo "Porcentaje Victorias: " . $estadistica["porcentaje victorias"] . "\n"; // muestra el puntaje total
+    echo "Jugador: " . $estadistica["jugador"] . "\n"; // muestra el nombre del jugador
+    echo "Partidas: " . $estadistica["partidas"] . "\n"; // muestra la cantidad de partidas jugadas
+    echo "puntaje Total: " . $estadistica["puntaje"] . "\n"; // muestra la suma de puntajes de todas las partidas
+    echo "Victorias: " . $estadistica["victorias"] . "\n"; // muestra todas las victorias del jugador
+    echo "Porcentaje Victorias: " . round(($estadistica["victorias"] / $estadistica["partidas"]) * 100, 2) . "\n"; // muestra el porcentaje de victorias
     echo "Adivinadas: \n";
     for ($cont = 1; $cont <= 6; $cont++) {
-        echo "\t Intento $cont: " . $estadistica[$cont] . "\n";
+        echo "\t Intento $cont: " . $estadistica["intento$cont"] . "\n"; // muestra la cantidad de victorias según los intentos necesarios para ganar
     }
     echo "***************************************************\n"; // separador estético
+
+   
 }
 
 /**
