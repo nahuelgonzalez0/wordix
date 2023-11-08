@@ -5,36 +5,24 @@ include_once("wordix.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
-
 /* ****COMPLETAR***** */
-
-
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
 
 //Declaración de variables:
-// array $menuOpciones, $indicePalabras, $partida
-// int $valor, $indiceElegido
-// float $opcion
-// string $usuarios, $mensaje
-// 
+//array $menu, $indicePalabras, $partida, $resultadoPartidas, $estadisticaUsuario
+//int $valor, $indiceElegido, $cantidad
+//float $opcion, $numeroPartida
+//string $usuarios, $mensaje, $indiceRandom, $palabras, $indicePalabras
 
 //Inicialización de variables:
 
 $indicePalabras = cargarColeccionPalabras(); // Inicializa el arreglo con la coleccion de palabras del juego
-
 $resultadoPartidas = cargarColeccionPartidas(); // Inicializa el arreglo con el historial de partidas
 
 //Proceso:
-
-
-//$partida = jugarWordix("MELON", strtolower($usuario));
-//print_r($partida);
-//imprimirResultado($partida);
-
-
 
 do {
   $menu = seleccionarOpcion();
@@ -43,13 +31,14 @@ do {
   $opcion = solicitarNumeroEntre(1, 8);
 
   switch ($opcion) {
+    //Switch corresponde a la estructura de controles alternativas (if, elseif)
     case 1:
       $usuarios = validacionUsuario();
 
       $cantidad = count($indicePalabras);
 
       echo "Hay $cantidad palabras cargadas, ingrese con cual que desea jugar: ";
-      $indiceElegido =  solicitarNumeroEntre(1, $cantidad);
+      (int)$indiceElegido =  solicitarNumeroEntre(1, $cantidad);
 
       $partida = jugarWordix($indicePalabras[(int)$indiceElegido - 1], strtolower($usuarios));
 

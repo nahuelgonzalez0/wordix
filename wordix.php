@@ -220,6 +220,8 @@ function esPalabra($cadena)
  */
 function solicitarJugador()
 {
+    //string $nombreUsuario
+
     echo "Ingrese su usuario: ";
     $nombreUsuario = trim(fgets(STDIN));
     $nombreUsuario = strtolower($nombreUsuario); // Convierte el string a minúsculas
@@ -239,6 +241,7 @@ function solicitarJugador()
 function leerPalabra5Letras()
 {
     //string $palabra
+
     echo "Ingrese una palabra de 5 letras: ";
     $palabra = trim(fgets(STDIN));
     $palabra  = strtoupper($palabra); // Convierte el string a mayúsculas
@@ -252,7 +255,7 @@ function leerPalabra5Letras()
 
 
 /**
- * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
+ * Inicia una estructura de datos Teclado. La estructura es de tipo: asociativo
  *@return array
  */
 function iniciarTeclado()
@@ -338,6 +341,10 @@ function imprimirIntentosWordix($estructuraIntentosWordix)
  */
 function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palabraIntento)
 {
+    //string $cantCaracteres, $letraIntento, $estado
+    //array $estructuraPalabraIntento
+    //booleano $posicion
+
     $cantCaracteres = strlen($palabraIntento);
     $estructuraPalabraIntento = []; /*almacena cada letra de la palabra intento con su estado */
     for ($i = 0; $i < $cantCaracteres; $i++) {
@@ -372,6 +379,8 @@ function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palab
  */
 function actualizarTeclado($teclado, $estructuraPalabraIntento)
 {
+    //array $letra, $estado
+
     foreach ($estructuraPalabraIntento as $letraIntento) {
         $letra = $letraIntento["letra"];
         $estado = $letraIntento["estado"];
@@ -396,6 +405,9 @@ function actualizarTeclado($teclado, $estructuraPalabraIntento)
  */
 function esIntentoGanado($estructuraPalabraIntento)
 {
+    //int $cantLetras, $i
+    //boolean $ganado
+
     $cantLetras = count($estructuraPalabraIntento);
     $i = 0;
 
@@ -420,28 +432,13 @@ function esIntentoGanado($estructuraPalabraIntento)
 function obtenerPuntajeWordix($intentos, $palabra)
 {
     //int $puntaje, $i
-    //bolean $condicion
-    //string $palabraSeparada, $diccionario
-
-    //Inicialización de variables
-    //$condicion = false;
-    //$diccionario = cargarColeccionPalabras();
-    //$puntaje = CANT_INTENTOS;
+    //array $palabraSeparada, $abecedario
 
     if ($intentos <= 6) {
         $puntaje = (CANT_INTENTOS + 1) - $intentos;
     } else {
         $puntaje = 0;
     };
-
-    /*while (!$condicion && $puntaje > 0) { //Para determinar el puntaje segun los intentos
-
-        if ($palabra == $palabra) {
-            $condicion = true;
-        } else {
-            $puntaje--;
-        }
-    }*/
 
     if ($puntaje > 0) { //Para determinar el puntaje según la letra
         $palabraSeparada = str_split($palabra);
@@ -472,6 +469,12 @@ function obtenerPuntajeWordix($intentos, $palabra)
  */
 function jugarWordix($palabraWordix, $nombreUsuario)
 {
+    /*Declaracion de variables*/
+    //array $arregloDeIntentosWordix, $teclado, $partida
+    //int $nroIntento, $indiceIntento, $puntaje
+    //string $palabraIntento
+    //boolean $ganoElIntento
+
     /*Inicialización*/
     $arregloDeIntentosWordix = [];
     $teclado = iniciarTeclado();
@@ -521,7 +524,6 @@ function jugarWordix($palabraWordix, $nombreUsuario)
  * @return 
  *  
  */
-
 function coleccionPartidas($colePartidas, $partida)
 {
 
@@ -535,7 +537,6 @@ function coleccionPartidas($colePartidas, $partida)
  * @param int $partidaNumero
  * @param array $listadoPartidas
  */
-
 function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoPartidas es el arreglo de la colección y $partidaNumero el índice que opera de número de partida
 {
 
@@ -649,6 +650,8 @@ function sumaPuntaje($nombreUsuario, $lista)
  */
 function estadisticas($estadistica, $nombreUsuario)
 {
+    //int $cont
+
     echo "***************************************************\n"; // separador estético
     echo "Jugador: " . $nombreUsuario . "\n"; // muestra el nombre del jugador
     echo "Partidas: " . $estadistica['partidas jugadas'] . "\n"; //muestra la cantidad de partidas
@@ -674,7 +677,8 @@ function cmp($a, $b)
         return strcmp($a['palabraWordix'], $b['palabraWordix']);
     }
     return strcmp($a['jugador'], $b['jugador']);
-    //lo que hace la funcion strcmp es que compara las cadenas de caracteres a nivel binario y devuelve un valor entero Devuelve < 0 si str1 es menor que str2; > 0 si str1 es mayor que str2 y 0 si son iguales
+    //lo que hace la funcion strcmp es que compara las cadenas de caracteres a nivel binario y devuelve un valor entero Devuelve < 0 si str1 es menor que str2; > 0 si str1 es mayor
+    //que str2 y 0 si son iguales
 }
 
 /**
