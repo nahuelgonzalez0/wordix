@@ -218,7 +218,7 @@ function esPalabra($cadena)
  * Valida si el primer caracter del nombre del usuario es una letra
  * @return string
  */
-function validacionUsuario()
+function solicitarJugador()
 {
     echo "Ingrese su usuario: ";
     $nombreUsuario = trim(fgets(STDIN));
