@@ -594,7 +594,7 @@ function coleccionPartidas($colePartidas, $partida)
 function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoPartidas es el arreglo de la colección y $partidaNumero el índice que opera de número de partida
 {
     // int $partidaMensaje
-    $partidaMensaje = $partidaNumero; // variable usada para que coincida el numero de palabra mostrado con el seleccionado por el usuario
+    $partidaMensaje = $partidaNumero; // variable usada para que coincida el numero de la partida mostrado con la realmente jugada
     $partidaNumero = $partidaNumero - 1; // Al numero ingresado por el usuario se le resta 1 para que coincida con el índice del arreglo $listadoPartidas
 
     echo "***************************************************\n"; // separador estético
