@@ -292,12 +292,10 @@ function solicitarJugador()
  * Le solicita al usuario una palabra de cinco letras y verifica que sea de cinco letras
  * @return string
  */
-function leerPalabra5Letras($nombreJugador)
+function leerPalabra5Letras()
 {
     //string $palabra
     
-    $resultados = cargarPartidas();
-
     echo "Ingrese una palabra de 5 letras: ";
     $palabra = trim(fgets(STDIN));
     $palabra  = strtoupper($palabra); // Convierte el string a mayúsculas
@@ -742,17 +740,33 @@ function imprimirPartidasOrdenandas($coleccion)
 
 /**
  * Permite agregar una palabra al arreglo $cargarColeccionPalabras y verifica que la palabra agregada no exista dentro del arreglo
+ * @param array $bibliotecaPalabras 
+ * @param string $palabra
  * @return array
  */
 function agregarPalabra($bibliotecaPalabras, $palabra)
-{
-    foreach($bibliotecaPalabras as $indice){
-        while($palabra === $indice){
-            echo "La palabra ingresada ya existe, ingrese otra: ";
-            $palabra = trim(fgets(STDIN));
+{   
+    $indiceBiblioteca = count($bibliotecaPalabras);
+    $indiceControl = 0;
+    $condicionBiblioteca = true;
+
+    while ($indiceControl<$indiceBiblioteca && $condicionBiblioteca){
+        while ($indiceControl<$indiceBiblioteca){    
+            if ($bibliotecaPalabras[$indiceControl] == $palabra){
+                echo "La palabra ingresada ya existe, ingrese otra: ";
+                $palabra = (leerPalabra5Letras());
+                $indiceControl = 0;
+            } else {
+                $indiceControl++;
+            } 
         }
+        
+        if ($indiceControl>=$indiceBiblioteca){
+            array_push($bibliotecaPalabras, $palabra);
+            echo "La palabra se agrego con exito.\n";
+            $condicionBiblioteca = false;
+        }
+        return $bibliotecaPalabras;
+        
     }
-    array_push($bibliotecaPalabras, $palabra);
-    echo "La palabra se agrego con exito.\n";
-    return $bibliotecaPalabras;
 }
