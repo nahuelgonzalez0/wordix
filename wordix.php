@@ -741,13 +741,18 @@ function imprimirPartidasOrdenandas($coleccion)
 }
 
 /**
- * Permite agregar una palabra al arreglo cargarColeccionPalabras
+ * Permite agregar una palabra al arreglo $cargarColeccionPalabras y verifica que la palabra agregada no exista dentro del arreglo
  * @return array
  */
 function agregarPalabra($bibliotecaPalabras, $palabra)
 {
-
+    foreach($bibliotecaPalabras as $indice){
+        while($palabra === $indice){
+            echo "La palabra ingresada ya existe, ingrese otra: ";
+            $palabra = trim(fgets(STDIN));
+        }
+    }
     array_push($bibliotecaPalabras, $palabra);
-
+    echo "La palabra se agrego con exito.\n";
     return $bibliotecaPalabras;
 }
