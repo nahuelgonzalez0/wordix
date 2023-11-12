@@ -45,9 +45,9 @@ do {
     case 2:
       $usuarios = solicitarJugador();
 
-      $indiceRandom = array_rand($indicePalabras); //array_rand selecciona un indice random
+      $palabraJugarRandom = verificaPalabraRandom($indicePalabras, $usuarios, $resultadoPartidas); //array_rand selecciona un indice random
 
-      $partida = jugarWordix($indicePalabras[$indiceRandom], strtolower($usuarios)); // $indicePalabras[$indiceRandom] devuelve la palabra de índice aleatorio como un string
+      $partida = jugarWordix($palabraJugarRandom, strtolower($usuarios)); // $indicePalabras[$indiceRandom] devuelve la palabra de índice aleatorio como un string
 
       $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
 

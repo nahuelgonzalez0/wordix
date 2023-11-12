@@ -805,3 +805,33 @@ function verificarPalabraRepetida($biblioPalabras, $user, $resuPartidas)
     
     return $palabraElegida;
 }
+
+/**
+* Verifica que el sistema no repita la misma palabra aleatoria
+* @param array $biblioPalabrasRandom, $resuPartidasRandom
+* @param string $userRandom
+* @return string
+*/
+function verificaPalabraRandom($biblioPalabrasRandom, $userRandom, $resuPartidasRandom)
+{
+  
+
+    $indicePalabraRandom = array_rand($biblioPalabrasRandom);
+    $palabraRandom = $biblioPalabrasRandom[$indicePalabraRandom];
+
+   
+    $indiceRandom = 0;
+    $topeResultadosRandom= count($resuPartidasRandom);
+   
+        while ($indiceRandom<$topeResultadosRandom){    
+            if ($resuPartidasRandom[$indiceRandom]["jugador"] == $userRandom && $resuPartidasRandom[$indiceRandom]["palabraWordix"] == $palabraRandom){
+                $indicePalabraRandom = array_rand($biblioPalabrasRandom);
+                $palabraRandom = $biblioPalabrasRandom[$indicePalabraRandom];
+                $indiceRandom = 0;
+            } else {
+                $indiceRandom++;
+            } 
+        }
+                
+    return $palabraRandom;
+}
