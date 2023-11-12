@@ -160,6 +160,7 @@ function cargarColeccionPalabras()
 function cargarPartidas() // modificado para que sea un arreglo multidimensional, por lo que los datos de la primer partida quedan como $coleccionPartida[0][*datos*]
 {
 
+
     $coleccionPartida = array(
         array(
             "palabraWordix" => "MUJER",
@@ -622,23 +623,26 @@ function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoP
  */
 function primerPartidaGanadora($nombre, $partidaListado)
 {
-    //boolean $condicion
-
     $condicion = false;
+    $i = 0;
 
-    foreach ($partidaListado as $valor => $partida) { // CAMBIAR A RECORRIDO PARCIAL
+    while ($i < count($partidaListado)) {
+        $partida = $partidaListado[$i];
+
         if ($partida["jugador"] == $nombre && $partida["puntaje"] > 0) {
-            //Verifica que valor nombre exista en la clave "jugador" y que la clave "puntaje" tenga un valor mayor a 0
             $condicion = true;
-            mostrarColeccionPartidas($partidaListado, $valor + 1);
-            break;
+            mostrarColeccionPartidas($partidaListado, $i + 1);
+            $i = count($partidaListado);
         }
+        $i++;
     }
 
-    if ($condicion == false) {
-        echo "el jugador $nombre no gano ninguna partida \n";
+    if (!$condicion) {
+        echo "El jugador $nombre no ganó ninguna partida\n";
     }
 }
+
+
 
 /**
  * Devuelve las estadísticas de un usuario ingresado

@@ -13,7 +13,7 @@ include_once("wordix.php");
 
 //Declaración de variables:
 //array $menu, $indicePalabras, $partida, $resultadoPartidas, $estadisticaUsuario
-//int $valor, $indiceElegido, $cantidad
+//int $valor, $indiceElegido, $cantidad, $nuevoIndice
 //float $opcion, $numeroPartida
 //string $usuarios, $mensaje, $indiceRandom, $palabras, $indicePalabras
 
@@ -39,11 +39,10 @@ do {
 
       echo "Hay $cantidad palabras cargadas, ingrese con cual que desea jugar: ";
       (int)$indiceElegido =  solicitarNumeroEntre(1, $cantidad);
-
-      $partida = jugarWordix($indicePalabras[(int)$indiceElegido - 1], strtolower($usuarios));
-
+ 
+      $partida = jugarWordix($indicePalabras[$indiceElegido - 1], strtolower($usuarios));
       $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
-
+ 
       break;
     case 2:
       $usuarios = solicitarJugador();
