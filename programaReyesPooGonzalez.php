@@ -35,12 +35,10 @@ do {
     case 1:
       $usuarios = solicitarJugador();
 
-      $cantidad = count($indicePalabras);
+      $palabraJugar = verificarPalabraRepetida($indicePalabras, $usuarios, $resultadoPartidas);
 
-      echo "Hay $cantidad palabras cargadas, ingrese con cual que desea jugar: ";
-      (int)$indiceElegido =  solicitarNumeroEntre(1, $cantidad);
- 
-      $partida = jugarWordix($indicePalabras[(int)$indiceElegido - 1], strtolower($usuarios));
+      $partida = jugarWordix($palabraJugar, strtolower($usuarios));
+
       $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
  
       break;

@@ -774,3 +774,39 @@ function agregarPalabra($bibliotecaPalabras, $palabra)
         
     }
 }
+
+/**
+* Verifica que el usuario no repita la misma palabra elegida en el juego
+* @param array $biblioPalabras, $resuPartidas
+* @param string $user
+* @return string
+*/
+function verificarPalabraRepetida($biblioPalabras, $user, $resuPartidas)
+{
+  
+    $indicePalabras = count($biblioPalabras);
+    echo "Hay $indicePalabras palabras cargadas, ingrese con cual que desea jugar: ";
+    $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
+    $indiceElegido = (int)$indiceElegido - 1;
+    $palabraElegida = $biblioPalabras[$indiceElegido];
+
+    $verifica = true;
+    $indiceResultados = 0;
+    $topeResultados= count($resuPartidas);
+    while ($indiceResultados<$topeResultados && $verifica){
+        while ($indiceResultados<$topeResultados){    
+            if ($resuPartidas[$indiceResultados]["jugador"] == $user && $resuPartidas[$indiceResultados]["palabraWordix"] == $palabraElegida){
+                echo "La palabra ingresada ya ha sido jugada, ingrese otra: ";
+                $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
+                $indiceElegido = (int)$indiceElegido - 1;
+                $palabraElegida = $biblioPalabras[$indiceElegido];
+                $indiceResultados = 0;
+            } else {
+                $indiceResultados++;
+            } 
+        }
+
+        return $palabraElegida;
+        
+    }
+}
