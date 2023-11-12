@@ -752,27 +752,24 @@ function agregarPalabra($bibliotecaPalabras, $palabra)
 {   
     $indiceBiblioteca = count($bibliotecaPalabras);
     $indiceControl = 0;
-    $condicionBiblioteca = true;
 
-    while ($indiceControl<$indiceBiblioteca && $condicionBiblioteca){
-        while ($indiceControl<$indiceBiblioteca){    
-            if ($bibliotecaPalabras[$indiceControl] == $palabra){
-                echo "La palabra ingresada ya existe, ingrese otra: ";
-                $palabra = (leerPalabra5Letras());
-                $indiceControl = 0;
-            } else {
-                $indiceControl++;
-            } 
-        }
-        
-        if ($indiceControl>=$indiceBiblioteca){
-            array_push($bibliotecaPalabras, $palabra);
-            echo "La palabra se agrego con exito.\n";
-            $condicionBiblioteca = false;
-        }
-        return $bibliotecaPalabras;
-        
+    while ($indiceControl<$indiceBiblioteca){    
+        if ($bibliotecaPalabras[$indiceControl] == $palabra){
+            echo "La palabra ingresada ya existe, ingrese otra: ";
+            $palabra = (leerPalabra5Letras());
+            $indiceControl = 0;
+        } else {
+            $indiceControl++;
+        } 
     }
+        
+    if ($indiceControl>=$indiceBiblioteca){
+        array_push($bibliotecaPalabras, $palabra);
+        echo "La palabra se agrego con exito.\n";
+
+    }
+    return $bibliotecaPalabras; 
+
 }
 
 /**
@@ -790,10 +787,10 @@ function verificarPalabraRepetida($biblioPalabras, $user, $resuPartidas)
     $indiceElegido = (int)$indiceElegido - 1;
     $palabraElegida = $biblioPalabras[$indiceElegido];
 
-    $verifica = true;
+   
     $indiceResultados = 0;
     $topeResultados= count($resuPartidas);
-    while ($indiceResultados<$topeResultados && $verifica){
+   
         while ($indiceResultados<$topeResultados){    
             if ($resuPartidas[$indiceResultados]["jugador"] == $user && $resuPartidas[$indiceResultados]["palabraWordix"] == $palabraElegida){
                 echo "La palabra ingresada ya ha sido jugada, ingrese otra: ";
@@ -805,8 +802,6 @@ function verificarPalabraRepetida($biblioPalabras, $user, $resuPartidas)
                 $indiceResultados++;
             } 
         }
-
-        return $palabraElegida;
-        
-    }
+    
+    return $palabraElegida;
 }
