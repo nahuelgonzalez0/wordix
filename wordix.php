@@ -276,14 +276,20 @@ function esPalabra($cadena)
 function solicitarJugador()
 {
     //string $nombreUsuario
-
+    
     echo "Ingrese su usuario: ";
     $nombreUsuario = trim(fgets(STDIN));
     $nombreUsuario = strtolower($nombreUsuario); // Convierte el string a minúsculas
+    if ($nombreUsuario==""){
+        $nombreUsuario = "1"; // En caso de que el usuario no ingrese ningun caracter
+    }
 
     while ($nombreUsuario[0] != ctype_alpha($nombreUsuario[0])) { //Verifica que el primer caracter sea una letra y se repite hasta que cumpla la condicion
         echo "Ingrese su nombre con el primer caracter como una letra: ";
         $nombreUsuario = trim(fgets(STDIN));
+        if ($nombreUsuario==""){
+            $nombreUsuario = "1"; // En caso de que el usuario no ingrese ningun caracter
+        }
     }
 
     return ($nombreUsuario);
