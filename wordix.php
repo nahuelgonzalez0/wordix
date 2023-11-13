@@ -145,9 +145,8 @@ function cargarColeccionPalabras()
 {
     $coleccionPalabras = [
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
-        "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
-        "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
-        "ARBOL", "ABETO", "ALAGO", "ALTAR", "MANOS"
+        "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES", 
+        "MOUSE"
     ];
 
     return ($coleccionPalabras);
@@ -782,22 +781,29 @@ function agregarPalabra($bibliotecaPalabras, $palabra)
 * Verifica que el usuario no repita la misma palabra elegida en el juego
 * @param array $biblioPalabras, $resuPartidas
 * @param string $user
-* @return string
+* @return array
 */
 function verificarPalabraRepetida($biblioPalabras, $user, $resuPartidas)
 {
-  
+
     $indicePalabras = count($biblioPalabras);
     echo "Hay $indicePalabras palabras cargadas, ingrese con cual que desea jugar: ";
     $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
     $indiceElegido = (int)$indiceElegido - 1;
     $palabraElegida = $biblioPalabras[$indiceElegido];
 
-   
+    //$contadorCiclos = 0;
+    $topeResultados = 0;
+    $control = true;
     $indiceResultados = 0;
-    $topeResultados= count($resuPartidas);
-   
-        while ($indiceResultados<$topeResultados){    
+
+    while ($control){
+        foreach ($resuPartidas as $indi){
+            if ($indi["jugador"] == $user){
+                $topeResultados++; //= count($resuPartidas);
+            }
+        }
+        while ($indiceResultados<$topeResultados && $control){
             if ($resuPartidas[$indiceResultados]["jugador"] == $user && $resuPartidas[$indiceResultados]["palabraWordix"] == $palabraElegida){
                 echo "La palabra ingresada ya ha sido jugada, ingrese otra: ";
                 $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
@@ -806,11 +812,63 @@ function verificarPalabraRepetida($biblioPalabras, $user, $resuPartidas)
                 $indiceResultados = 0;
             } else {
                 $indiceResultados++;
-            } 
+            }
         }
-    
-    return $palabraElegida;
+        if ($resuPartidas>=$topeResultados && $resuPartidas[$indiceResultados]["jugador"] == $user && $resuPartidas[$indiceResultados]["palabraWordix"] == $palabraElegida){
+            $control = false;
+            echo "Ya ha jugado con todas las palabras, ingrese la opcion 7 para agregar otra.\n";
+
+        } else {
+            $partida = jugarWordix($palabraElegida, $user);
+            $resul= coleccionPartidas($resuPartidas, $partida);
+            $control = false;
+            $topeResultados = 0;
+        }
+    }
+    return $resul;
 }
+/*{
+
+    $indicePalabras = count($biblioPalabras);
+    echo "Hay $indicePalabras palabras cargadas, ingrese con cual que desea jugar: ";
+    $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
+    $indiceElegido = (int)$indiceElegido - 1;
+    $palabraElegida = $biblioPalabras[$indiceElegido];
+
+    //$contadorCiclos = 0;
+    $topeResultados = 0;
+    $control = true;
+    $control2=true;
+    $indiceResultados = 0;
+    foreach ($resuPartidas as $indi){
+        if ($indi["jugador"] == $user){
+            $topeResultados++; //= count($resuPartidas);
+        }
+    }
+    while ($control){
+        while ($indiceResultados<$topeResultados && $control2){
+            if ($resuPartidas[$indiceResultados]["jugador"] == $user && $resuPartidas[$indiceResultados]["palabraWordix"] == $palabraElegida){
+                $control2 = false;
+                $indiceResultados = 0;
+            } else {
+                $indiceResultados++;
+                echo $indiceResultados."\n";
+            }
+        }
+        if (!$control2){
+
+        echo "La palabra ingresada ya ha sido jugada, ingrese otra: ";
+        $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
+        $indiceElegido = (int)$indiceElegido - 1;
+        $palabraElegida = $biblioPalabras[$indiceElegido];
+        $control2 = true;
+        }
+        if ($indiceResultados>=$topeResultados){
+            $control = false;
+        }
+    }
+    //return $palabraElegida;
+}*/
 
 /**
 * Verifica que el sistema no repita la misma palabra aleatoria
