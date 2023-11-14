@@ -142,14 +142,17 @@ function escribirMensajeBienvenida($usuario)
  * @return array
  */
 function cargarColeccionPalabras()
-{
+{   
+    //array $coleccionPalabras (arreglo indexado con todas las palabras usadas en el juego)
+
     $coleccionPalabras = [
-        "MUJER", "QUESO"
+        "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
+        "GATOS", "GOTAS", "HUEVO", "TINTO",  "NAVES",
+        "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
+        "ARBOL", "ABETO", "ALAGO", "ALTAR", "MANOS"
     ];
-    //"FUEGO", "CASAS", "RASGO",
-        //"GATOS", "GOTAS", "HUEVO", "TINTO",  "NAVES",
-        //"VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
-        //"ARBOL", "ABETO", "ALAGO", "ALTAR", "MANOS"
+    
+
     return ($coleccionPalabras);
 }
 
@@ -160,6 +163,7 @@ function cargarColeccionPalabras()
 function cargarPartidas() // modificado para que sea un arreglo multidimensional, por lo que los datos de la primer partida quedan como $coleccionPartida[0][*datos*]
 {
 
+    // array $coleccionPartida (arreglo multidimensional con las partidas jugadas)
 
     $coleccionPartida = array(
         array(
@@ -233,6 +237,8 @@ function cargarPartidas() // modificado para que sea un arreglo multidimensional
  */
 function seleccionarOpcion()
 {
+    //array $menuOpciones (arreglo indexado con el menu de opciones)
+
     $menuOpciones = [
         "\nMenú de opciones",
         "1) Jugar al wordix con una palabra elegida",
@@ -258,7 +264,9 @@ function seleccionarOpcion()
  */
 function esPalabra($cadena)
 {
-    //int $cantCaracteres, $i, boolean $esLetra
+    //int $cantCaracteres, $i, 
+    //boolean $esLetra
+
     $cantCaracteres = strlen($cadena);
     $esLetra = true;
     $i = 0;
@@ -375,8 +383,11 @@ function escribirTeclado($teclado)
  */
 function imprimirIntentosWordix($estructuraIntentosWordix)
 {
+    // int $cantIntentosRealizados, $estructuraIntento
+    
+
     $cantIntentosRealizados = count($estructuraIntentosWordix);
-    //$cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
+    $cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
 
     for ($i = 0; $i < $cantIntentosRealizados; $i++) {
         $estructuraIntento = $estructuraIntentosWordix[$i];
@@ -394,7 +405,7 @@ function imprimirIntentosWordix($estructuraIntentosWordix)
         }
         echo "\n";
     }
-    //echo "\n" . "Le quedan " . $cantIntentosFaltantes . " Intentos para adivinar la palabra!";
+    echo "\n" . "Le quedan " . $cantIntentosFaltantes . " Intentos para adivinar la palabra!\n";
 }
 
 /**
@@ -499,7 +510,8 @@ function esIntentoGanado($estructuraPalabraIntento)
 function obtenerPuntajeWordix($intentos, $palabra)
 {
     //int $puntaje, $i
-    //array $palabraSeparada, $abecedario
+    //array $palabraSeparada (arreglo indexado, valores del string corresponden a cada caracter de la palabra) 
+    //array $abecedario (arreglo multidimensional, cada índice contiene un tipo de letra)
 
     if ($intentos <= 6) {
         $puntaje = (CANT_INTENTOS + 1) - $intentos;
@@ -550,7 +562,7 @@ function jugarWordix($palabraWordix, $nombreUsuario)
     do {
 
         echo "Comenzar con el Intento " . $nroIntento . ":\n";
-        $palabraIntento = leerPalabra5Letras($nombreUsuario);
+        $palabraIntento = leerPalabra5Letras();
         $indiceIntento = $nroIntento - 1;
         $arregloDeIntentosWordix = analizarPalabraIntento($palabraWordix, $arregloDeIntentosWordix, $palabraIntento);
         $teclado = actualizarTeclado($teclado, $arregloDeIntentosWordix[$indiceIntento]);
@@ -607,6 +619,7 @@ function coleccionPartidas($colePartidas, $partida)
 function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoPartidas es el arreglo de la colección y $partidaNumero el índice que opera de número de partida
 {
     // int $partidaMensaje
+
     $partidaMensaje = $partidaNumero; // variable usada para que coincida el numero de la partida mostrado con la realmente jugada
     $partidaNumero = $partidaNumero - 1; // Al numero ingresado por el usuario se le resta 1 para que coincida con el índice del arreglo $listadoPartidas
 
@@ -632,6 +645,10 @@ function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoP
  */
 function primerPartidaGanadora($nombre, $partidaListado)
 {
+    // boolean $condicion
+    // int $i
+    // string $partida
+
     $condicion = false;
     $i = 0;
 
@@ -661,7 +678,7 @@ function primerPartidaGanadora($nombre, $partidaListado)
 function estadisticas($nombreUsuario, $lista)
 {
     //int $acumulador, $contadorGanadas, $contadorJugadas, $contadorIntentos
-    //array $estadistica
+    //array $estadistica (arreglo asociativo, almacena los datos del jugador)
 
 
     $acumulador = 0;
@@ -758,6 +775,8 @@ function imprimirPartidasOrdenandas($coleccion)
  */
 function agregarPalabra($bibliotecaPalabras, $palabra)
 {
+    //int $indiceBiblioteca, $indiceControl
+
     $indiceBiblioteca = count($bibliotecaPalabras);
     $indiceControl = 0;
 
@@ -839,6 +858,7 @@ function verificaPalabraRandom($biblioPalabrasRandom, $userRandom, $resuPartidas
     // int $indicePalabraRandom, $indiceRandom, $topeResultadosRandom
     // string $palabraRandom
     // boolean $controladorFinal, $controlador, $controlador2
+
     $indicePalabraRandom = array_rand($biblioPalabrasRandom);
     $palabraRandom = $biblioPalabrasRandom[$indicePalabraRandom];
     $indiceRandom = 0;
@@ -882,7 +902,8 @@ function contadorFinalJuego($biblioPalabrasFinal, $userFinal, $resuPartidasFinal
 {
     // boolean $salirModulo 
     // int $cantidadFinalBiblioteca, $cantidadFinalPartidas
-    // array $opciones, $mensaje
+    // array $opciones (arreglo indexado, muestra el submenu en caso de usar todas las palabras), $mensaje (arreglo indexado, contiene letras del mensaje final)
+
     $salirModulo = false;
     $cantidadFinalBiblioteca = count($biblioPalabrasFinal);
     $cantidadFinalPartidas = 0;
@@ -926,7 +947,6 @@ function contadorFinalJuego($biblioPalabrasFinal, $userFinal, $resuPartidasFinal
                         };
                     }
                     exit("\nINSERT COIN (s)");
-                    break;
             }
         } while ($opcionesFinal != 2);
     }
