@@ -742,7 +742,7 @@ function estadisticas($nombreUsuario, $lista)
 }
 
 /**
- * ordena el arreglo de partida por jugador y por palabra, ambas se ordenan en forma alfabetica
+ * Ordena el arreglo de partida por jugador y por palabra, ambas se ordenan en forma alfabetica
  * @param array $a
  * @param array $b
  * @return int
@@ -757,7 +757,7 @@ function cmp($a, $b)
 }
 
 /**
- * imprime el arreglo de partida por jugador y por palabra, ambas se ordenan en forma alfabetica
+ * Imprime el arreglo de partida por jugador y por palabra, ambas se ordenan en forma alfabetica
  * @param array $coleccion
  * 
  */

@@ -6,35 +6,44 @@ funcion escribirVerde: ^^^
 funcion escribirAmarillo: ^^^
 funcion escribirGris: ^^^
 funcion escribirNormal: ^^^
-#Linea 59 a 91
+#Linea 60 a 96
 
 funcion escribirSegunEstado: Escribe un texto en pantalla teniendo en cuenta el estado.
-#Linea 100
+#Linea 106
 
 funcion escribirMensajeBienvenida: Le da mensaje de bienvenida al usuario.
-#Linea 124
+#Linea 131
 
 funcion cargarColeccionPalabras: Obtiene una colección de palabras.
-#Linea 136
+#Linea 144
+
+funcion cargarPartidas: Almacena las partidas del usuario
+#Linea 163
+
+funcion seleccionarOpcion: Muestra por pantalla las opciones que hay para elegir
+#Linea 238
 
 funcion esPalabra: Verifica si la palabra ingresada por el usuario no contiene numeros ni caracteres especiales.
-#Linea 153
+#Linea 265
+
+funcion solicitarJugador: Valida si el primer caracter del nombre del usuario es una letra
+#Linea 284
 
 funcion leerPalabra5Letras: Le solicita al usuario una palabra de cinco letras y verifica que sea de cinco letras.
-#Linea 170
+#Linea 313
 
 funcion iniciarTeclado: Inicia una estructura de datos Teclado.
-#Linea 188
+#Linea 336
 
 funcion escribirTeclado: Escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
-#Linea 205
+#Linea 354
 
 funcion imprimirIntentosWordix: Escribe en pantalla los intentos de Wordix para adivinar la palabra
-#Linea 234
+#Linea 384
 
 funcion analizarPalabraIntento: Dada la palabra wordix a adivinar, la estructura para almacenar la información del intento y la palabra que intenta adivinar la palabra wordix.
 Devuelve la estructura de intentos Wordix modificada con el intento.
-#Linea 266
+#Linea 420
 
 funcion actualizarTeclado: Actualiza el estado de las letras del teclado. 
  * Teniendo en cuenta que una letra sólo puede pasar:
@@ -42,13 +51,43 @@ funcion actualizarTeclado: Actualiza el estado de las letras del teclado.
  * de ESTADO_LETRA_DISPONIBLE a ESTADO_LETRA_DESCARTADA, 
  * de ESTADO_LETRA_DISPONIBLE a ESTADO_LETRA_PERTENECE
  * de ESTADO_LETRA_PERTENECE a ESTADO_LETRA_ENCONTRADA
-#Linea 299
+#Linea 458
 
 funcion esIntentoGanado: Determina si se ganó una palabra intento posee todas sus letras "Encontradas".
-#Linea 322
+#Linea 484
 
 funcion obtenerPuntajeWordix: Le marca el puntaje al usuario
-#Linea 334
+#Linea 510
 
 funcion jugarWordix: Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
-#Linea 391
+#Linea 549
+
+funcion coleccionPartidas: Incorpora una partida a la colección de partidas jugadas
+#Linea 606
+
+funcion mostrarColeccionPartidas: Devuelve las partidas jugadas según su número de partidas.
+#Linea 619
+
+funcion primerPartidaGanadora: Devuelve la primer partida ganadora
+#Linea 649
+
+funcion estadisticas: Devuelve las estadísticas de un usuario ingresado
+#Linea 678
+
+funcion cmp: Ordena el arreglo de partida por jugador y por palabra, ambas se ordenan en forma alfabetica
+#Linea 750
+
+funcion imprimirPartidasOrdenadas: Imprime el arreglo de partida por jugador y por palabra, ambas se ordenan en forma alfabetica
+#Linea 764
+
+funcion agregarPalabra: Permite agregar una palabra al arreglo $cargarColeccionPalabras y verifica que la palabra agregada no exista dentro del arreglo
+#Linea 776
+
+funcion verificaPalabraRepetida: Verifica que el usuario no repita la misma palabra elegida en el juego
+#Linea 806
+
+funcion verificaPalabraRandom: Verifica que el sistema no repita la misma palabra alateoria
+#Linea 856
+
+funcion contadorFinalJuego: Controla el caso en el que se jugaron todas las palabras
+#Linea 901
