@@ -145,10 +145,10 @@ function cargarColeccionPalabras()
 {
     $coleccionPalabras = [
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
-        "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES", 
-        "MOUSE"
+        "GATOS", "GOTAS", "HUEVO", "TINTO",  "NAVES",
+        "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
+        "ARBOL", "ABETO", "ALAGO", "ALTAR", "MANOS"
     ];
-
     return ($coleccionPalabras);
 }
 
@@ -275,19 +275,22 @@ function esPalabra($cadena)
 function solicitarJugador()
 {
     //string $nombreUsuario
-    
+
     echo "Ingrese su usuario: ";
     $nombreUsuario = trim(fgets(STDIN));
     $nombreUsuario = strtolower($nombreUsuario); // Convierte el string a minúsculas
-    if ($nombreUsuario==""){
-        $nombreUsuario = "1"; // En caso de que el usuario no ingrese ningun caracter
+    switch ($nombreUsuario) {
+        case "":
+            $nombreUsuario = "1";
+            break;
     }
-
     while ($nombreUsuario[0] != ctype_alpha($nombreUsuario[0])) { //Verifica que el primer caracter sea una letra y se repite hasta que cumpla la condicion
         echo "Ingrese su nombre con el primer caracter como una letra: ";
         $nombreUsuario = trim(fgets(STDIN));
-        if ($nombreUsuario==""){
-            $nombreUsuario = "1"; // En caso de que el usuario no ingrese ningun caracter
+        switch ($nombreUsuario) {
+            case "":
+                $nombreUsuario = "1";
+                break;
         }
     }
 
@@ -301,7 +304,7 @@ function solicitarJugador()
 function leerPalabra5Letras()
 {
     //string $palabra
-    
+
     echo "Ingrese una palabra de 5 letras: ";
     $palabra = trim(fgets(STDIN));
     $palabra  = strtoupper($palabra); // Convierte el string a mayúsculas
@@ -313,8 +316,8 @@ function leerPalabra5Letras()
 
     return $palabra; //retorna la palabra ingresada
 }
-    
-    
+
+
 
 
 /**
@@ -658,7 +661,7 @@ function estadisticas($nombreUsuario, $lista)
 {
     //int $acumulador, $contadorGanadas, $contadorJugadas, $contadorIntentos
     //array $estadistica
-    
+
 
     $acumulador = 0;
     $contadorGanadas = 0;
@@ -717,7 +720,7 @@ function estadisticas($nombreUsuario, $lista)
     }
     echo "***************************************************\n"; // separador estético
 
-   
+
 }
 
 /**
@@ -731,9 +734,8 @@ function cmp($a, $b)
     if ($a['jugador'] == $b['jugador']) {
         return $a['palabraWordix'] <=> $b['palabraWordix']; // El operador <=> resuelve si una variable es mayor, igual o menor que la otra
     } else {
-    return $a['jugador'] <=> $b['jugador']; 
+        return $a['jugador'] <=> $b['jugador'];
     }
-    
 }
 
 /**
@@ -754,35 +756,33 @@ function imprimirPartidasOrdenandas($coleccion)
  * @return array
  */
 function agregarPalabra($bibliotecaPalabras, $palabra)
-{   
+{
     $indiceBiblioteca = count($bibliotecaPalabras);
     $indiceControl = 0;
 
-    while ($indiceControl<$indiceBiblioteca){    
-        if ($bibliotecaPalabras[$indiceControl] == $palabra){
+    while ($indiceControl < $indiceBiblioteca) {
+        if ($bibliotecaPalabras[$indiceControl] == $palabra) {
             echo "La palabra ingresada ya existe, ingrese otra: ";
             $palabra = (leerPalabra5Letras());
             $indiceControl = 0;
         } else {
             $indiceControl++;
-        } 
+        }
     }
-        
-    if ($indiceControl>=$indiceBiblioteca){
+
+    if ($indiceControl >= $indiceBiblioteca) {
         array_push($bibliotecaPalabras, $palabra);
         echo "La palabra se agrego con exito.\n";
-
     }
-    return $bibliotecaPalabras; 
-
+    return $bibliotecaPalabras;
 }
 
 /**
-* Verifica que el usuario no repita la misma palabra elegida en el juego
-* @param array $biblioPalabras, $resuPartidas
-* @param string $user
-* @return array
-*/
+ * Verifica que el usuario no repita la misma palabra elegida en el juego
+ * @param array $biblioPalabras, $resuPartidas
+ * @param string $user
+ * @return string
+ */
 function verificarPalabraRepetida($biblioPalabras, $user, $resuPartidas)
 {
 
@@ -791,111 +791,125 @@ function verificarPalabraRepetida($biblioPalabras, $user, $resuPartidas)
     $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
     $indiceElegido = (int)$indiceElegido - 1;
     $palabraElegida = $biblioPalabras[$indiceElegido];
-
-    //$contadorCiclos = 0;
-    $topeResultados = 0;
+    $controlFinal = false;
     $control = true;
+    $control2 = true;
     $indiceResultados = 0;
+    $topeResultados = count($resuPartidas);
 
-    while ($control){
-        foreach ($resuPartidas as $indi){
-            if ($indi["jugador"] == $user){
-                $topeResultados++; //= count($resuPartidas);
-            }
-        }
-        while ($indiceResultados<$topeResultados && $control){
-            if ($resuPartidas[$indiceResultados]["jugador"] == $user && $resuPartidas[$indiceResultados]["palabraWordix"] == $palabraElegida){
-                echo "La palabra ingresada ya ha sido jugada, ingrese otra: ";
-                $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
-                $indiceElegido = (int)$indiceElegido - 1;
-                $palabraElegida = $biblioPalabras[$indiceElegido];
-                $indiceResultados = 0;
-            } else {
-                $indiceResultados++;
-            }
-        }
-        if ($resuPartidas>=$topeResultados && $resuPartidas[$indiceResultados]["jugador"] == $user && $resuPartidas[$indiceResultados]["palabraWordix"] == $palabraElegida){
-            $control = false;
-            echo "Ya ha jugado con todas las palabras, ingrese la opcion 7 para agregar otra.\n";
-
-        } else {
-            $partida = jugarWordix($palabraElegida, $user);
-            $resul= coleccionPartidas($resuPartidas, $partida);
-            $control = false;
-            $topeResultados = 0;
-        }
-    }
-    return $resul;
-}
-/*{
-
-    $indicePalabras = count($biblioPalabras);
-    echo "Hay $indicePalabras palabras cargadas, ingrese con cual que desea jugar: ";
-    $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
-    $indiceElegido = (int)$indiceElegido - 1;
-    $palabraElegida = $biblioPalabras[$indiceElegido];
-
-    //$contadorCiclos = 0;
-    $topeResultados = 0;
-    $control = true;
-    $control2=true;
-    $indiceResultados = 0;
-    foreach ($resuPartidas as $indi){
-        if ($indi["jugador"] == $user){
-            $topeResultados++; //= count($resuPartidas);
-        }
-    }
-    while ($control){
-        while ($indiceResultados<$topeResultados && $control2){
-            if ($resuPartidas[$indiceResultados]["jugador"] == $user && $resuPartidas[$indiceResultados]["palabraWordix"] == $palabraElegida){
+    while ($control && !$controlFinal) {
+        while ($indiceResultados < $topeResultados && $control2) {
+            if ($resuPartidas[$indiceResultados]["jugador"] == $user && $resuPartidas[$indiceResultados]["palabraWordix"] == $palabraElegida) {
                 $control2 = false;
                 $indiceResultados = 0;
             } else {
                 $indiceResultados++;
-                echo $indiceResultados."\n";
             }
         }
-        if (!$control2){
-
-        echo "La palabra ingresada ya ha sido jugada, ingrese otra: ";
-        $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
-        $indiceElegido = (int)$indiceElegido - 1;
-        $palabraElegida = $biblioPalabras[$indiceElegido];
-        $control2 = true;
+        if (!$control2) {
+            echo "La palabra ingresada ya ha sido jugada, ingrese otra: ";
+            $indiceElegido =  solicitarNumeroEntre(1, $indicePalabras);
+            $indiceElegido = (int)$indiceElegido - 1;
+            $palabraElegida = $biblioPalabras[$indiceElegido];
+            $control2 = true;
+            $controlFinal = contadorFinalJuego($biblioPalabras, $user, $resuPartidas);
+            if ($controlFinal) {
+                $palabraElegida = "fin";
+            }
         }
-        if ($indiceResultados>=$topeResultados){
+        if ($indiceResultados >= $topeResultados) {
             $control = false;
         }
     }
-    //return $palabraElegida;
-}*/
+    return $palabraElegida;
+}
 
 /**
-* Verifica que el sistema no repita la misma palabra aleatoria
-* @param array $biblioPalabrasRandom, $resuPartidasRandom
-* @param string $userRandom
-* @return string
-*/
+ * Verifica que el sistema no repita la misma palabra aleatoria
+ * @param array $biblioPalabrasRandom, $resuPartidasRandom
+ * @param string $userRandom
+ * @return string
+ */
 function verificaPalabraRandom($biblioPalabrasRandom, $userRandom, $resuPartidasRandom)
 {
-  
+
 
     $indicePalabraRandom = array_rand($biblioPalabrasRandom);
     $palabraRandom = $biblioPalabrasRandom[$indicePalabraRandom];
 
-   
     $indiceRandom = 0;
-    $topeResultadosRandom= count($resuPartidasRandom);
-   
-        while ($indiceRandom<$topeResultadosRandom){    
-            if ($resuPartidasRandom[$indiceRandom]["jugador"] == $userRandom && $resuPartidasRandom[$indiceRandom]["palabraWordix"] == $palabraRandom){
-                $indicePalabraRandom = array_rand($biblioPalabrasRandom);
-                $palabraRandom = $biblioPalabrasRandom[$indicePalabraRandom];
-                $indiceRandom = 0;
-            } else {
-                $indiceRandom++;
-            } 
+    $topeResultadosRandom = count($resuPartidasRandom);
+
+
+
+    while ($indiceRandom < $topeResultadosRandom) {
+        if ($resuPartidasRandom[$indiceRandom]["jugador"] == $userRandom && $resuPartidasRandom[$indiceRandom]["palabraWordix"] == $palabraRandom) {
+            $indicePalabraRandom = array_rand($biblioPalabrasRandom);
+            $palabraRandom = $biblioPalabrasRandom[$indicePalabraRandom];
+            $indiceRandom = 0;
+        } else {
+            $indiceRandom++;
         }
-                
+    }
+
     return $palabraRandom;
+}
+
+/**
+ * Controla el caso en el que se jugaron todas las palabras
+ * @param array $biblioPalabrasFinal, $resuPartidasFinal
+ * @param string $userFinal
+ * @return 
+ */
+function contadorFinalJuego($biblioPalabrasFinal, $userFinal, $resuPartidasFinal)
+{
+
+    $salirModulo = false;
+    $cantidadFinalBiblioteca = count($biblioPalabrasFinal);
+    $cantidadFinalPartidas = 0;
+    foreach ($resuPartidasFinal as $finalPartidas) {
+        if ($finalPartidas["jugador"] == $userFinal) {
+            $cantidadFinalPartidas++;
+        }
+    }
+    if ($cantidadFinalBiblioteca == $cantidadFinalPartidas) {
+        $Opciones = [
+            "\n1) Mostrar el resumen de $userFinal",
+            "2) Volver al menu principal",
+            "3) Finalizar el juego"
+        ];
+
+        do {
+            echo "Ya se han jugado las $cantidadFinalBiblioteca palabras, tiene las siguientes opciones: \n";
+            foreach ($Opciones as $opcionesFinales) {
+                echo $opcionesFinales . "\n";
+            }
+
+            echo "Ingrese su opción: ";
+            $opcionesFinal = solicitarNumeroEntre(1, 3);
+
+            switch ($opcionesFinal) {
+                case 1:
+                    estadisticas($userFinal, $resuPartidasFinal);
+                    break;
+                case 2:
+                    $salirModulo = true;
+                    break;
+                case 3:
+                    $mensaje = ["G", "A", "M", "E", "O", "V", "E", "R"];
+                    for ($i = 0; $i <= 7; $i++) {
+                        if ($i < 4) {
+                            echo $mensaje[$i] . " ";
+                        }
+                        echo " ";
+                        if ($i >= 4) {
+                            echo $mensaje[$i] . " ";
+                        };
+                    }
+                    exit("\nINSERT COIN (s)");
+                    break;
+            }
+        } while ($opcionesFinal != 2);
+    }
+    return $salirModulo;
 }

@@ -35,12 +35,12 @@ do {
     case 1:
       $usuarios = solicitarJugador();
 
-      $resultadoPartidas = verificarPalabraRepetida($indicePalabras, $usuarios, $resultadoPartidas);
-
-      //$partida = jugarWordix($palabraJugar, strtolower($usuarios));
-
-      //$resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
- 
+      $palabraJugar = verificarPalabraRepetida($indicePalabras, $usuarios, $resultadoPartidas);
+      
+      if ($palabraJugar != "fin"){
+      $partida = jugarWordix($palabraJugar, strtolower($usuarios));
+      $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
+    } 
       break;
     case 2:
       $usuarios = solicitarJugador();
