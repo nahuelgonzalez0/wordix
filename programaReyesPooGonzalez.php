@@ -44,13 +44,12 @@ do {
       break;
     case 2:
       $usuarios = solicitarJugador();
+      $palabraJugarRandom = verificaPalabraRandom($indicePalabras, $usuarios, $resultadoPartidas); 
 
-      $palabraJugarRandom = verificaPalabraRandom($indicePalabras, $usuarios, $resultadoPartidas); //array_rand selecciona un indice random
-
-      $partida = jugarWordix($palabraJugarRandom, strtolower($usuarios)); // $indicePalabras[$indiceRandom] devuelve la palabra de índice aleatorio como un string
-
-      $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
-
+      if ($palabraJugarRandom != "fin"){
+        $partida = jugarWordix($palabraJugarRandom, strtolower($usuarios));
+        $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
+      }
       break;
     case 3:
       echo "Ingrese el número de partida: ";

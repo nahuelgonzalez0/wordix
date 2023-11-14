@@ -144,11 +144,12 @@ function escribirMensajeBienvenida($usuario)
 function cargarColeccionPalabras()
 {
     $coleccionPalabras = [
-        "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
-        "GATOS", "GOTAS", "HUEVO", "TINTO",  "NAVES",
-        "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
-        "ARBOL", "ABETO", "ALAGO", "ALTAR", "MANOS"
+        "MUJER", "QUESO"
     ];
+    //"FUEGO", "CASAS", "RASGO",
+        //"GATOS", "GOTAS", "HUEVO", "TINTO",  "NAVES",
+        //"VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
+        //"ARBOL", "ABETO", "ALAGO", "ALTAR", "MANOS"
     return ($coleccionPalabras);
 }
 
@@ -785,6 +786,9 @@ function agregarPalabra($bibliotecaPalabras, $palabra)
  */
 function verificarPalabraRepetida($biblioPalabras, $user, $resuPartidas)
 {
+    // int $indicePalabras, $indiceElegido, $indiceResultados, $topeResultados
+    // string $palabraElegida
+    // boolean $controlFinal, $control, $control2
 
     $indicePalabras = count($biblioPalabras);
     echo "Hay $indicePalabras palabras cargadas, ingrese con cual que desea jugar: ";
@@ -832,38 +836,53 @@ function verificarPalabraRepetida($biblioPalabras, $user, $resuPartidas)
  */
 function verificaPalabraRandom($biblioPalabrasRandom, $userRandom, $resuPartidasRandom)
 {
-
-
+    // int $indicePalabraRandom, $indiceRandom, $topeResultadosRandom
+    // string $palabraRandom
+    // boolean $controladorFinal, $controlador, $controlador2
     $indicePalabraRandom = array_rand($biblioPalabrasRandom);
     $palabraRandom = $biblioPalabrasRandom[$indicePalabraRandom];
-
     $indiceRandom = 0;
+    $controladorFinal = false;
+    $controlador = true;
+    $controlador2 = true;
     $topeResultadosRandom = count($resuPartidasRandom);
-
-
-
-    while ($indiceRandom < $topeResultadosRandom) {
-        if ($resuPartidasRandom[$indiceRandom]["jugador"] == $userRandom && $resuPartidasRandom[$indiceRandom]["palabraWordix"] == $palabraRandom) {
-            $indicePalabraRandom = array_rand($biblioPalabrasRandom);
-            $palabraRandom = $biblioPalabrasRandom[$indicePalabraRandom];
-            $indiceRandom = 0;
-        } else {
-            $indiceRandom++;
+    while ($controlador && !$controladorFinal) {
+        while ($indiceRandom < $topeResultadosRandom && $controlador2) {
+            if ($resuPartidasRandom[$indiceRandom]["jugador"] == $userRandom && $resuPartidasRandom[$indiceRandom]["palabraWordix"] == $palabraRandom) {
+                $controlador2 = false;
+                $indiceRandom = 0;
+            } else {
+                $indiceRandom++;
+            }
+        }
+        if (!$controlador2) {
+        $indicePalabraRandom = array_rand($biblioPalabrasRandom);
+        $palabraRandom = $biblioPalabrasRandom[$indicePalabraRandom];
+        $controlador2 = true;
+        $controladorFinal = contadorFinalJuego($biblioPalabrasRandom, $userRandom, $resuPartidasRandom);
+            if ($controladorFinal) {
+                $palabraRandom = "fin";
+            }
+        }
+        if ($indiceRandom >= $topeResultadosRandom) {
+            $controlador = false;
         }
     }
-
     return $palabraRandom;
 }
+
 
 /**
  * Controla el caso en el que se jugaron todas las palabras
  * @param array $biblioPalabrasFinal, $resuPartidasFinal
  * @param string $userFinal
- * @return 
+ * @return boolean
  */
 function contadorFinalJuego($biblioPalabrasFinal, $userFinal, $resuPartidasFinal)
 {
-
+    // boolean $salirModulo 
+    // int $cantidadFinalBiblioteca, $cantidadFinalPartidas
+    // array $opciones, $mensaje
     $salirModulo = false;
     $cantidadFinalBiblioteca = count($biblioPalabrasFinal);
     $cantidadFinalPartidas = 0;
