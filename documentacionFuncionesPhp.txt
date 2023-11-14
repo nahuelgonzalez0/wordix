@@ -1,0 +1,32 @@
+trim(fgets(STDIN)) = combinación de funciones que devuelve el valor ingresado por el teclado de la forma ingresada.
+
+is_numeric() = Comprueba si una variable es un número o un string numérico, su parámetro de entrada es una variable y devuelve un valor booleano.
+
+echo = visualiza las salidas de la aplicación.
+
+array() = Crea un arreglo, su parámetro de entrada puede ser una variable o estar vacio (en ese caso crea un arreglo sin valores asignados).
+
+strlen() =  Obtiene la longitud de un string, su parámetro de entrada es una variable que contiene un valor string y devuelve un valor entero.
+
+ctype_alpha() = Verifica si todos los caracteres de un string son alfabéticos, las letras se limitan a [A-Za-z], su parámetro de entrada es un string.
+
+strtolower() = Convierte un string a minúsculas.
+
+strtoupper() = Convierte un string a mayúsculas.
+
+count() = Cuenta todos los elementos de un arreglo.
+
+strpos() = Encuentra la posición de la primera ocurrencia de un substring en un string, sus parámetros de entrada son un substring (lo que buscar)
+           y un string (donde se busca), devuelve la posición de inicio como un valor entero, y en caso de no encontrar el substring devuelve un valor booleano "false".
+        
+array_push() = Inserta uno o más elementos al final de un arreglo.
+
+str_split() = Convierte un string en un arreglo indexado.
+
+in_array() = Comprueba si un valor existe en un arreglo, devuelve un valor booleano "verdadero" en caso de existir en el arreglo y uno "falso" en el caso contrario.
+
+uasort() = Ordena un arreglo con una función de comparación definida por el usuario y mantiene la asociación de índices.
+
+print_r() = Imprime información legible para humanos sobre una variable.
+
+array_rand() = Selecciona una o más claves aleatorias de un arreglo.
