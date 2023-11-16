@@ -645,11 +645,13 @@ function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoP
 function primerPartidaGanadora($nombre, $partidaListado)
 {
     // boolean $condicion
-    // int $i
+    // int $i, $contadorExisteJugador
     // string $partida
 
     $condicion = false;
     $i = 0;
+    $contadorExisteJugador = 0;
+
 
     while ($i < count($partidaListado)) {
         $partida = $partidaListado[$i];
@@ -659,11 +661,17 @@ function primerPartidaGanadora($nombre, $partidaListado)
             mostrarColeccionPartidas($partidaListado, $i + 1);
             $i = count($partidaListado);
         }
+        if ($partida["jugador"] == $nombre) {
+            $contadorExisteJugador++;
+        }
         $i++;
     }
-
-    if (!$condicion) {
+    if (!$condicion && $contadorExisteJugador > 0) {
         echo "El jugador $nombre no ganó ninguna partida\n";
+    }
+
+    if ($contadorExisteJugador == 0) {
+        echo "El jugador $nombre no existe\n";
     }
 }
 
@@ -780,7 +788,7 @@ function agregarPalabra($bibliotecaPalabras, $palabra)
     $indiceControl = 0;
     $verifica = true;
 
-    while ($indiceControl < $indiceBiblioteca && $verifica){
+    while ($indiceControl < $indiceBiblioteca && $verifica) {
         while ($indiceControl < $indiceBiblioteca && $verifica) {
             if ($bibliotecaPalabras[$indiceControl] <> $palabra) {
                 $indiceControl++;
@@ -790,8 +798,8 @@ function agregarPalabra($bibliotecaPalabras, $palabra)
                 $indiceControl = 0;
                 echo "¿Desea continuar (SI/NO)? ";
                 $palabraContinuar = strtoupper(trim(fgets((STDIN))));
-                if (esPalabra($palabraContinuar) && $palabraContinuar != "SI"){
-                    $verifica = false;                   
+                if (esPalabra($palabraContinuar) && $palabraContinuar != "SI") {
+                    $verifica = false;
                 }
             }
         }
@@ -799,7 +807,7 @@ function agregarPalabra($bibliotecaPalabras, $palabra)
         if ($indiceControl >= $indiceBiblioteca) {
             array_push($bibliotecaPalabras, $palabra);
             echo "La palabra se agrego con exito.\n";
-        } else { 
+        } else {
             echo "La palabra no se agrego.\n";
         }
     }
