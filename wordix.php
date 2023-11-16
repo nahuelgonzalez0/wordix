@@ -148,10 +148,9 @@ function cargarColeccionPalabras()
     $coleccionPalabras = [
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO",  "NAVES",
-
+        "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
+        "ARBOL", "ABETO", "ALAGO", "ALTAR", "MANOS"
     ];
-    /*"VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
-    "ARBOL", "ABETO", "ALAGO", "ALTAR", "MANOS"*/
 
     return ($coleccionPalabras);
 }
@@ -781,28 +780,28 @@ function agregarPalabra($bibliotecaPalabras, $palabra)
     $indiceControl = 0;
     $verifica = true;
 
-    while ($indiceControl < $indiceBiblioteca && $verifica) {
-        if ($bibliotecaPalabras[$indiceControl] == $palabra) {
-            echo "La palabra ingresada ya existe, ingrese otra palabra o escriba \"volver\" para ir al menu: ";
-            $palabraSalir = trim(fgets(STDIN));
-            if ($palabraSalir == "volver") {
-                $verifica = false;
+    while ($indiceControl < $indiceBiblioteca && $verifica){
+        while ($indiceControl < $indiceBiblioteca && $verifica) {
+            if ($bibliotecaPalabras[$indiceControl] <> $palabra) {
+                $indiceControl++;
             } else {
+                echo "La palabra ingresada ya existe, ingrese otra: ";
                 $palabra = (leerPalabra5Letras());
                 $indiceControl = 0;
+                echo "¿Desea continuar (SI/NO)? ";
+                $palabraContinuar = strtoupper(trim(fgets((STDIN))));
+                if (esPalabra($palabraContinuar) && $palabraContinuar != "SI"){
+                    $verifica = false;                   
+                }
             }
-            /*$palabraSalir = $palabra;
-            if ($palabraSalir == "SALIR"){
-                $verifica = false;           
-            }*/
-        } else {
-            $indiceControl++;
         }
-    }
 
-    if ($indiceControl >= $indiceBiblioteca && $verifica) {
-        array_push($bibliotecaPalabras, $palabra);
-        echo "La palabra se agrego con exito.\n";
+        if ($indiceControl >= $indiceBiblioteca) {
+            array_push($bibliotecaPalabras, $palabra);
+            echo "La palabra se agrego con exito.\n";
+        } else { 
+            echo "La palabra no se agrego.\n";
+        }
     }
     return $bibliotecaPalabras;
 }
