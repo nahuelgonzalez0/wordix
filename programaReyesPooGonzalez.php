@@ -31,22 +31,22 @@ do {
   $opcion = solicitarNumeroEntre(1, 8);
 
   switch ($opcion) {
-    //Switch corresponde a la estructura de controles alternativas (if, elseif)
+      //Switch corresponde a la estructura de controles alternativas (if, elseif)
     case 1:
       $usuarios = solicitarJugador();
 
       $palabraJugar = verificarPalabraRepetida($indicePalabras, $usuarios, $resultadoPartidas);
-      
-      if ($palabraJugar != "fin"){
-      $partida = jugarWordix($palabraJugar, strtolower($usuarios));
-      $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
-    } 
+
+      if ($palabraJugar != "fin") {
+        $partida = jugarWordix($palabraJugar, strtolower($usuarios));
+        $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
+      }
       break;
     case 2:
       $usuarios = solicitarJugador();
-      $palabraJugarRandom = verificaPalabraRandom($indicePalabras, $usuarios, $resultadoPartidas); 
+      $palabraJugarRandom = verificaPalabraRandom($indicePalabras, $usuarios, $resultadoPartidas);
 
-      if ($palabraJugarRandom != "fin"){
+      if ($palabraJugarRandom != "fin") {
         $partida = jugarWordix($palabraJugarRandom, strtolower($usuarios));
         $resultadoPartidas = coleccionPartidas($resultadoPartidas, $partida);
       }
@@ -70,12 +70,13 @@ do {
       $usuarios = solicitarJugador();
 
       estadisticas($usuarios, $resultadoPartidas);
-      
+
       break;
     case 6:
       imprimirPartidasOrdenandas($resultadoPartidas);
       break;
     case 7:
+
       $palabras = leerPalabra5Letras();
 
       $indicePalabras = agregarPalabra($indicePalabras, $palabras);
