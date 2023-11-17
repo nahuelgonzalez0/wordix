@@ -618,23 +618,25 @@ function coleccionPartidas($colePartidas, $partida)
 function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoPartidas es el arreglo de la colección y $partidaNumero el índice que opera de número de partida
 {
     // int $partidaMensaje
+    if ($partidaNumero>-1) {        
+        $partidaMensaje = $partidaNumero; // variable usada para que coincida el numero de la partida mostrado con la realmente jugada
+        $partidaNumero = $partidaNumero - 1; // Al numero ingresado por el usuario se le resta 1 para que coincida con el índice del arreglo $listadoPartidas
 
-    $partidaMensaje = $partidaNumero; // variable usada para que coincida el numero de la partida mostrado con la realmente jugada
-    $partidaNumero = $partidaNumero - 1; // Al numero ingresado por el usuario se le resta 1 para que coincida con el índice del arreglo $listadoPartidas
-
-    echo "***************************************************\n"; // separador estético
-    echo "Partida WORDIX " . "$partidaMensaje" . ": " . "palabra " . $listadoPartidas[$partidaNumero]["palabraWordix"] . "\n"; //muestra el numero de partida y la palabra usada
-    echo "Jugador: " . $listadoPartidas[$partidaNumero]["jugador"] . "\n"; // muestra el nombre del jugador en el índice ingresado
-    echo "puntaje: " . $listadoPartidas[$partidaNumero]["puntaje"] . " puntos" . "\n"; // muestra el puntaje obtenido en el índice ingresado
-    if ($listadoPartidas[$partidaNumero]["puntaje"] == 0) {
-        echo 'Intento: No adivino la palabra'; // muestra en caso de que no se adivine la palabra durante la partida
-    } elseif ($listadoPartidas[$partidaNumero]["intentos"] == 1) {
-        echo "adivino la palabra en: {$listadoPartidas[$partidaNumero]["intentos"]} intento"; // muestra si el intento es 1 (en singular la palabra intento)
-    } else {
-        echo "adivino la palabra en: {$listadoPartidas[$partidaNumero]["intentos"]} intentos"; // muestra el mensaje si los intentos fueron más (palabra intento en plural)
+        echo "***************************************************\n"; // separador estético
+        echo "Partida WORDIX " . "$partidaMensaje" . ": " . "palabra " . $listadoPartidas[$partidaNumero]["palabraWordix"] . "\n"; //muestra el numero de partida y la palabra usada
+        echo "Jugador: " . $listadoPartidas[$partidaNumero]["jugador"] . "\n"; // muestra el nombre del jugador en el índice ingresado
+        echo "puntaje: " . $listadoPartidas[$partidaNumero]["puntaje"] . " puntos" . "\n"; // muestra el puntaje obtenido en el índice ingresado
+        if ($listadoPartidas[$partidaNumero]["puntaje"] == 0) {
+            echo 'Intento: No adivino la palabra'; // muestra en caso de que no se adivine la palabra durante la partida
+        } elseif ($listadoPartidas[$partidaNumero]["intentos"] == 1) {
+            echo "adivino la palabra en: {$listadoPartidas[$partidaNumero]["intentos"]} intento"; // muestra si el intento es 1 (en singular la palabra intento)
+        } else {
+            echo "adivino la palabra en: {$listadoPartidas[$partidaNumero]["intentos"]} intentos"; // muestra el mensaje si los intentos fueron más (palabra intento en plural)
+        }
+        echo "\n"; // espacio luego del texto, para no agregarlo en cada if/elseif/else.
+        echo "***************************************************\n"; // separador estético
     }
-    echo "\n"; // espacio luego del texto, para no agregarlo en cada if/elseif/else.
-    echo "***************************************************\n"; // separador estético
+
 }
 
 /**
@@ -644,35 +646,35 @@ function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoP
  */
 function primerPartidaGanadora($nombre, $partidaListado)
 {
-    // boolean $condicion
-    // int $i, $contadorExisteJugador
-    // string $partida
+    // boolean $condicionPartidaGanadora
+    // int $indicePartidaGanada, $contadorExisteJugador
+    // string $partidaGanadora
 
-    $condicion = false;
-    $i = 0;
+    $condicionPartidaGanadora = false;
+    $indicePartidaGanada = 0;
     $contadorExisteJugador = 0;
+        
+    while ($indicePartidaGanada < count($partidaListado) && !$condicionPartidaGanadora) {
+        $partidaListado[$indicePartidaGanada]["jugador"]==$nombre ? $contadorExisteJugador++ : null;
+        $partidaGanadora = $partidaListado[$indicePartidaGanada];
 
-
-    while ($i < count($partidaListado)) {
-        $partida = $partidaListado[$i];
-
-        if ($partida["jugador"] == $nombre && $partida["puntaje"] > 0) {
-            $condicion = true;
-            mostrarColeccionPartidas($partidaListado, $i + 1);
-            $i = count($partidaListado);
+        if ($partidaGanadora["jugador"] == $nombre && $partidaGanadora["puntaje"] > 0) {
+            $condicionPartidaGanadora = true;
+            $indicePartidaGanada++;
+        } else {
+            $indicePartidaGanada++;
         }
-        if ($partida["jugador"] == $nombre) {
-            $contadorExisteJugador++;
-        }
-        $i++;
     }
-    if (!$condicion && $contadorExisteJugador > 0) {
+    if ($indicePartidaGanada>=count($partidaListado)) {
         echo "El jugador $nombre no ganó ninguna partida\n";
+        $indicePartidaGanada=-2;
     }
 
     if ($contadorExisteJugador == 0) {
         echo "El jugador $nombre no existe\n";
+        $indicePartidaGanada = -2;
     }
+    return $indicePartidaGanada;
 }
 
 /**

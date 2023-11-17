@@ -64,7 +64,9 @@ do {
     case 4:
       $usuarios = solicitarJugador();
 
-      primerPartidaGanadora($usuarios, $resultadoPartidas);
+      $indiceGanador = primerPartidaGanadora($usuarios, $resultadoPartidas);
+
+      mostrarColeccionPartidas($resultadoPartidas, $indiceGanador);
       break;
     case 5:
       $usuarios = solicitarJugador();
