@@ -640,7 +640,7 @@ function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoP
 }
 
 /**
- * Devuelve la primer partida ganadora
+ * Controla que el jugador existe, si ganó partidas y retorna el indice de la primer partida ganadora
  * @param string $nombre 
  * @param array $partidaListado
  */
@@ -767,7 +767,7 @@ function estadisticaMensaje($listadoPartida, $usuarioEstadistica)
  * @param array $b
  * @return int
  */
-function cmp($a, $b)
+function ordenar($a, $b)
 {
     if ($a['jugador'] == $b['jugador']) {
         return $a['palabraWordix'] <=> $b['palabraWordix']; // El operador <=> resuelve si una variable es mayor, igual o menor que la otra
@@ -783,7 +783,7 @@ function cmp($a, $b)
  */
 function imprimirPartidasOrdenandas($coleccion)
 {
-    uasort($coleccion, 'cmp'); // uasort — Ordena un array con una función de comparación definida por el usuario y mantiene la asociación de índices
+    uasort($coleccion, 'ordenar'); // uasort — Ordena un array con una función de comparación definida por el usuario y mantiene la asociación de índices
     print_r($coleccion); // print_r — Imprime información legible para humanos sobre una variable
 }
 
