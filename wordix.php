@@ -693,6 +693,7 @@ function estadisticas($nombreUsuario, $lista)
     $contadorGanadas = 0;
     $contadorJugadas = 0;
     $contadorIntentos = 0;
+    $contadorJugadorEstadisticaExiste = 0;
 
     $estadistica = array(
         "jugador" => $nombreUsuario,
@@ -711,6 +712,7 @@ function estadisticas($nombreUsuario, $lista)
         if ($partida["jugador"] === $nombreUsuario) {
             $acumulador = $acumulador + $partida["puntaje"];
             $estadistica["puntaje"] = $acumulador;
+            $contadorJugadorEstadisticaExiste++;
         }
         if ($partida["jugador"] === $nombreUsuario) {
             if ($partida["puntaje"] > 0) {
@@ -733,6 +735,9 @@ function estadisticas($nombreUsuario, $lista)
             $contadorIntentos = 0;
         }
     }
+    if ($contadorJugadorEstadisticaExiste == 0){
+        $estadistica= [-1];
+    }
     return $estadistica;
 }
 
@@ -743,8 +748,9 @@ function estadisticas($nombreUsuario, $lista)
  */
 function estadisticaMensaje($listadoPartida, $usuarioEstadistica)
 {
-
-    if ($listadoPartida['puntaje'] >= 0) {
+    if ($listadoPartida == [-1]){
+        echo "El jugador $usuarioEstadistica no existe \n";
+    } elseif ($listadoPartida['puntaje'] >= 0) {
         echo "\n"; // separador estético
         echo "Jugador: " . $listadoPartida["jugador"] . "\n"; // muestra el nombre del jugador
         echo "Partidas: " . $listadoPartida["partidas"] . "\n"; // muestra la cantidad de partidas jugadas
@@ -756,8 +762,6 @@ function estadisticaMensaje($listadoPartida, $usuarioEstadistica)
             echo "\t Intento $cont: " . $listadoPartida["intento$cont"] . "\n"; // muestra la cantidad de victorias según los intentos necesarios para ganar
         }
         echo "\n"; // separador estético
-    } else {
-        echo "El jugador $usuarioEstadistica no existe \n";
     }
 }
 
