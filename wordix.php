@@ -675,12 +675,11 @@ function primerPartidaGanadora($nombre, $partidaListado)
     }
 }
 
-
-
 /**
- * Devuelve las estadísticas de un usuario ingresado
+ * Calcula las estadísticas de un usuario ingresado
  * @param string $nombreUsuario
  * @param array $lista
+ * @return array
  */
 function estadisticas($nombreUsuario, $lista)
 {
@@ -732,20 +731,32 @@ function estadisticas($nombreUsuario, $lista)
             $contadorIntentos = 0;
         }
     }
+    return $estadistica;
+}
 
-    echo "***************************************************\n"; // separador estético
-    echo "Jugador: " . $estadistica["jugador"] . "\n"; // muestra el nombre del jugador
-    echo "Partidas: " . $estadistica["partidas"] . "\n"; // muestra la cantidad de partidas jugadas
-    echo "puntaje Total: " . $estadistica["puntaje"] . "\n"; // muestra la suma de puntajes de todas las partidas
-    echo "Victorias: " . $estadistica["victorias"] . "\n"; // muestra todas las victorias del jugador
-    echo "Porcentaje Victorias: " . round(($estadistica["victorias"] / $estadistica["partidas"]) * 100, 2) . "\n"; // muestra el porcentaje de victorias
-    echo "Adivinadas: \n";
-    for ($cont = 1; $cont <= 6; $cont++) {
-        echo "\t Intento $cont: " . $estadistica["intento$cont"] . "\n"; // muestra la cantidad de victorias según los intentos necesarios para ganar
+/**
+ * Devuelve las estadísticas de un usuario ingresado por pantalla
+ * @param string $nombreUsuario
+ * @param array $lista
+ */
+function estadisticaMensaje($listadoPartida, $usuarioEstadistica)
+{
+
+    if ($listadoPartida['puntaje'] >= 0) {
+        echo "\n"; // separador estético
+        echo "Jugador: " . $listadoPartida["jugador"] . "\n"; // muestra el nombre del jugador
+        echo "Partidas: " . $listadoPartida["partidas"] . "\n"; // muestra la cantidad de partidas jugadas
+        echo "puntaje Total: " . $listadoPartida["puntaje"] . "\n"; // muestra la suma de puntajes de todas las partidas
+        echo "Victorias: " . $listadoPartida["victorias"] . "\n"; // muestra todas las victorias del jugador
+        echo "Porcentaje Victorias: " . round(($listadoPartida["victorias"] / $listadoPartida["partidas"]) * 100, 2) . "\n"; // muestra el porcentaje de victorias
+        echo "Adivinadas: \n";
+        for ($cont = 1; $cont <= 6; $cont++) {
+            echo "\t Intento $cont: " . $listadoPartida["intento$cont"] . "\n"; // muestra la cantidad de victorias según los intentos necesarios para ganar
+        }
+        echo "\n"; // separador estético
+    } else {
+        echo "El jugador $usuarioEstadistica no existe \n";
     }
-    echo "***************************************************\n"; // separador estético
-
-
 }
 
 /**

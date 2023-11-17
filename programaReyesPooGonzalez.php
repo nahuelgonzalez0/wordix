@@ -69,8 +69,9 @@ do {
     case 5:
       $usuarios = solicitarJugador();
 
-      estadisticas($usuarios, $resultadoPartidas);
+      $valorEstadistica = estadisticas($usuarios, $resultadoPartidas);
 
+      estadisticaMensaje($valorEstadistica, $usuarios);
       break;
     case 6:
       imprimirPartidasOrdenandas($resultadoPartidas);
