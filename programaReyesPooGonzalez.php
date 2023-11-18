@@ -57,9 +57,12 @@ do {
       $cantidad = count($resultadoPartidas); // devuelve la cantidad de elementos en el arreglo multidimensional $resultadoPartidas
 
       $numeroPartida = solicitarNumeroEntre(1, $cantidad);
+      
+      $indiceNumeroPartida = intval($numeroPartida);
 
-      mostrarColeccionPartidas($resultadoPartidas, $numeroPartida);
+      $indiceNumeroPartida--;
 
+      mostrarColeccionPartidas($resultadoPartidas, $indiceNumeroPartida);
       break;
     case 4:
       $usuarios = solicitarJugador();

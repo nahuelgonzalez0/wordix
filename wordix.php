@@ -618,9 +618,17 @@ function coleccionPartidas($colePartidas, $partida)
 function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoPartidas es el arreglo de la colección y $partidaNumero el índice que opera de número de partida
 {
     // int $partidaMensaje
-    if ($partidaNumero>-1) {        
-        $partidaMensaje = $partidaNumero; // variable usada para que coincida el numero de la partida mostrado con la realmente jugada
-        $partidaNumero = $partidaNumero - 1; // Al numero ingresado por el usuario se le resta 1 para que coincida con el índice del arreglo $listadoPartidas
+    // boolean $partidaNoGanada
+    
+    $partidaNoGanada = is_numeric(($partidaNumero));
+
+    if (!$partidaNoGanada){
+        echo "El jugador $partidaNumero no ganó ninguna partida\n";
+    } elseif ($partidaNumero == -2){
+        echo "El jugador ingresado no existe\n";
+    } else {        
+        $partidaMensaje = $partidaNumero + 1; // variable usada para que coincida el numero de la partida mostrado con la realmente jugada
+        $partidaNumero = $partidaNumero; // Al numero ingresado por el usuario se le resta 1 para que coincida con el índice del arreglo $listadoPartidas
 
         echo "***************************************************\n"; // separador estético
         echo "Partida WORDIX " . "$partidaMensaje" . ": " . "palabra " . $listadoPartidas[$partidaNumero]["palabraWordix"] . "\n"; //muestra el numero de partida y la palabra usada
@@ -647,31 +655,29 @@ function mostrarColeccionPartidas($listadoPartidas, $partidaNumero) // $listadoP
 function primerPartidaGanadora($nombre, $partidaListado)
 {
     // boolean $condicionPartidaGanadora
-    // int $indicePartidaGanada, $contadorExisteJugador
-    // string $partidaGanadora
+    // int $contadorExisteJugador, topePartidasGanadas
+    // int|string $indicePartidaGanada
 
     $condicionPartidaGanadora = false;
     $indicePartidaGanada = 0;
     $contadorExisteJugador = 0;
+    $topePartidasGanadas = count($partidaListado);
         
-    while ($indicePartidaGanada < count($partidaListado) && !$condicionPartidaGanadora) {
+    while ($indicePartidaGanada < $topePartidasGanadas && !$condicionPartidaGanadora) {
         $partidaListado[$indicePartidaGanada]["jugador"]==$nombre ? $contadorExisteJugador++ : null;
         $partidaGanadora = $partidaListado[$indicePartidaGanada];
 
         if ($partidaGanadora["jugador"] == $nombre && $partidaGanadora["puntaje"] > 0) {
             $condicionPartidaGanadora = true;
-            $indicePartidaGanada++;
+            $indicePartidaGanada;
         } else {
             $indicePartidaGanada++;
         }
     }
-    if ($indicePartidaGanada>=count($partidaListado)) {
-        echo "El jugador $nombre no ganó ninguna partida\n";
-        $indicePartidaGanada=-2;
+    if ($indicePartidaGanada>=$topePartidasGanadas && $contadorExisteJugador > 0) {
+        $indicePartidaGanada = $nombre;
     }
-
     if ($contadorExisteJugador == 0) {
-        echo "El jugador $nombre no existe\n";
         $indicePartidaGanada = -2;
     }
     return $indicePartidaGanada;
